@@ -1,0 +1,46 @@
+#!/bin/sh
+# Claude Resolve — pre-commit guard for a PUBLIC repository.
+# Blocks the commit when staged additions look like leaked personal data
+# or secrets. Verified false positive? Bypass with:  git commit --no-verify
+#
+# Activated per-clone with:  git config core.hooksPath .githooks
+set -u
+
+# Added lines from the staged diff, excluding this hook itself
+# (it necessarily contains the very patterns it scans for).
+added=$(git diff --cached --unified=0 --no-color --diff-filter=ACM \
+            -- . ':(exclude).githooks/pre-commit' \
+        | grep '^+' | grep -v '^+++')
+
+[ -z "$added" ] && exit 0
+
+fail=0
+scan() {
+    label=$1
+    pattern=$2
+    hits=$(printf '%s\n' "$added" | grep -Ei "$pattern" || true)
+    if [ -n "$hits" ]; then
+        printf '  \033[31mx\033[0m %s\n' "$label"
+        printf '%s\n' "$hits" | sed 's/^/      /'
+        fail=1
+    fi
+}
+
+scan "personal path fragment (_olehkupshukov)" '_olehkupshukov'
+scan "personal home directory path"            '([a-z]:\\users\\|/users/|/home/)[a-z0-9._-]+'
+scan "absolute drive-letter path (F:/ or C:\\)" '(^|[^a-z])[a-z]:[\\/]'
+scan "personal username (olegk)"               '(^|[^[:alnum:]])olegk([^[:alnum:]]|$)'
+scan "personal email address (gmail)"          '[a-z0-9._%+-]+@gmail\.com'
+scan "Notion workspace link"                   'notion\.(so|site)/'
+scan "Anthropic API key"                       'sk-ant-[a-z0-9_-]{10,}'
+scan "GitHub token"                            '(ghp_|gho_|ghs_|github_pat_)[a-z0-9_]{20,}'
+scan "AWS access key id"                       'AKIA[0-9A-Z]{12,}'
+scan "private key block"                       'BEGIN [A-Z ]*PRIVATE KEY'
+
+if [ "$fail" -ne 0 ]; then
+    printf '\n\033[31mCommit blocked\033[0m - staged changes look like they leak personal data or secrets.\n'
+    printf 'Fix the lines above (use <USERNAME> placeholders, env vars, or .gitignore).\n'
+    printf 'If this is a verified false positive: git commit --no-verify\n\n'
+    exit 1
+fi
+exit 0

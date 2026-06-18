@@ -1,0 +1,563 @@
+{
+  "actionBar": {
+    "source": "소스",
+    "options": "옵션",
+    "subtitleStyle": "자막 스타일",
+    "subtitleStyleDescription": "자막",
+    "model": "모델",
+    "censor": {
+      "title": "민감한 단어 검열",
+      "wordCount": "{{count}}개 단어",
+      "dialogDescription": "자막에서 검열할 단어를 추가하세요.",
+      "dialogTitle": "민감한 단어 검열",
+      "empty": "검열된 단어가 없습니다.",
+      "inputPlaceholder": "검열할 단어 추가",
+      "lists": "단어 목록",
+      "customSection": "사용자 정의 단어",
+      "customSectionDescription": "검열할 개별 단어를 입력하세요.",
+      "listWordCount": "{{count}}개 단어"
+    },
+    "common": {
+      "auto": "자동",
+      "off": "끄기"
+    },
+    "fileDrop": {
+      "aria": "오디오 파일을 여기에 놓거나 클릭하여 선택",
+      "prompt": "파일을 놓거나 클릭",
+      "supports": "대부분의 형식 지원"
+    },
+    "fileDialog": {
+      "mediaFiles": "미디어 파일 (ffmpeg 지원)"
+    },
+    "format": {
+      "lineCountDescription": "자막당 최대 줄 수",
+      "lineCountTitle": "줄 수",
+      "removePunctuationDescription": "쉼표, 마침표 등을 제거",
+      "removePunctuationTitle": "구두점 제거",
+      "textCase": {
+        "lowercase": "소문자",
+        "normal": "보통",
+        "titleCase": "제목 형식",
+        "uppercase": "대문자"
+      },
+      "textCaseDescription": "자막 대소문자 변경",
+      "textCaseTitle": "텍스트 케이스",
+      "textDensityTitle": "텍스트 밀도",
+      "textDensityDescription": "화면에 표시할 텍스트 양",
+      "textDensity": {
+        "single": "단어 단위",
+        "less": "적게",
+        "standard": "표준",
+        "more": "많이",
+        "custom": "사용자 지정"
+      },
+      "customCharsTitle": "최대 문자 수",
+      "customCharsDescription": "줄당 문자 수",
+      "customPromptButton": "프롬프트",
+      "customPromptTitle": "어휘 및 맥락",
+      "customPromptDescription": "Whisper를 안내하기 위한 용어, 이름 또는 맥락을 추가하세요.",
+      "customPromptPlaceholder": "예: OpenAI, DaVinci Resolve — Resolve의 자막 편집 튜토리얼.",
+      "customPromptLanguageWarning": "오디오와 같은 언어로 작성하세요 — 다른 언어의 프롬프트는 잘못된 전사를 유발할 수 있습니다.",
+      "customPromptWhisperOnly": "Whisper 모델에서만 지원됩니다."
+    },
+    "language": {
+      "title": "언어",
+      "noLanguageFound": "언어를 찾을 수 없습니다.",
+      "searchSourcePlaceholder": "언어 검색...",
+      "searchTargetPlaceholder": "대상 언어 검색...",
+      "source": "소스",
+      "translate": "번역"
+    },
+    "mode": {
+      "fileInput": "파일",
+      "timeline": "타임라인"
+    },
+    "speakers": {
+      "countTitle": "화자 수",
+      "description": "다른 화자 식별",
+      "disabled": "비활성화됨",
+      "title": "화자 레이블"
+    },
+    "tracks": {
+      "exportRange": {
+        "entire": "전체 타임라인",
+        "inout": "인/아웃 포인트"
+      },
+      "clearAll": "모두 지우기",
+      "countSelected": "{{count}}개 트랙 선택됨",
+      "createTrack": "타임라인을 찾을 수 없습니다",
+      "noneFound": "오디오 트랙을 찾을 수 없습니다.",
+      "noneSelected": "선택된 트랙 없음",
+      "selectAll": "모두 선택",
+      "selectedLabel": "{{label}} 선택됨",
+      "trackN": "트랙 {{n}}"
+    }
+  },
+  "common": {
+    "add": "추가",
+    "apply": "적용",
+    "back": "뒤로",
+    "cancel": "취소",
+    "close": "닫기",
+    "delete": "삭제",
+    "done": "완료",
+    "generateSubtitles": "생성",
+    "startNewTranscription": "새 트랜스크립션 시작",
+    "next": "다음",
+    "refresh": "연결 새로고침"
+  },
+  "update": {
+    "restartResolveServer": {
+      "title": "업데이트가 설치되었습니다",
+      "description": "AutoSubs가 다시 시작되어 Resolve와의 연결이 끊어졌습니다. 업데이트된 Lua 서버를 시작하려면 DaVinci Resolve에서 작업 공간 -> 스크립트 -> AutoSubs를 다시 실행하세요."
+    }
+  },
+  "completion": {
+    "processingComplete": "처리 완료",
+    "subtitlesReady": "자막이 준비되었습니다!",
+    "noSpeechDetected": "음성이 감지되지 않았습니다. 오디오 파일이 무음이거나 인식 가능한 음성이 포함되어 있지 않을 수 있습니다.",
+    "viewSubtitles": "자막 보기",
+    "exportToFile": "파일로 내보내기",
+    "addToTimeline": "타임라인에 추가"
+  },
+  "importExport": {
+    "button": "내보내기 / 가져오기",
+    "downloadFormat": "{{format}} 다운로드",
+    "dropHere": "파일을 여기에 놓거나 클릭하여 선택",
+    "exportAsSrt": "SRT로 내보내기",
+    "exportFormats": {
+      "srt": {
+        "description": "YouTube, VLC 같은 앱에서 사용하는 표준 자막 형식입니다. 타임스탬프를 포함합니다.",
+        "title": "자막 (.srt)"
+      },
+      "txt": {
+        "description": "가능한 경우 화자 라벨을 포함하는 LLM용 일반 텍스트 내보내기입니다.",
+        "title": "전사문 (.txt)"
+      }
+    },
+    "exportTab": "내보내기",
+    "fileDialog": {
+      "subtitleFiles": "자막 파일"
+    },
+    "importFile": "파일 가져오기",
+    "importTab": "가져오기",
+    "selected": "선택됨:",
+    "supportsSrt": ".srt 파일 지원"
+  },
+  "gettingStarted": {
+    "title": "AutoSubs에 오신 것을 환영합니다",
+    "description": "사용하실 언어를 선택하세요. 인터페이스(지원 시)와 전사에 사용됩니다.",
+    "selectLanguage": "언어 선택",
+    "searchLanguage": "언어 검색...",
+    "noLanguageFound": "언어를 찾을 수 없습니다.",
+    "resolveNote": {
+      "openResolve": "DaVinci Resolve를 열고 다음으로 이동:",
+      "workspace": "Workspace(상단 메뉴)",
+      "scripts": "Scripts",
+      "autosubs": "AutoSubs"
+    },
+    "continue": "시작하기"
+  },
+  "tour": {
+    "connection": {
+      "title": "연결 상태",
+      "description": "AutoSubs가 DaVinci Resolve와 연결되어 있는지 표시합니다. 초록색은 연결되어 타임라인에 접근할 준비가 되었음을 의미합니다."
+    },
+    "modeSwitcher": {
+      "title": "입력 모드",
+      "description": "파일을 직접 전사하거나 DaVinci Resolve 타임라인에서 오디오를 추출하는 모드를 전환하세요."
+    },
+    "modelPicker": {
+      "title": "AI 모델",
+      "description": "음성 인식 모델을 선택하세요. 사용 언어를 지원하는 모델이 자동으로 선택되었습니다. 모델마다 속도와 정확도의 균형이 다릅니다."
+    },
+    "audioInput": {
+      "title": "오디오 소스",
+      "description": "Resolve 타임라인에서 오디오 트랙을 선택하거나 미디어 파일을 여기에 드롭하여 직접 전사하세요."
+    },
+    "controls": {
+      "title": "전사 설정",
+      "description": "언어, 화자 식별, 텍스트 서식을 구성한 다음 '자막 생성'을 클릭하여 시작하세요."
+    },
+    "history": {
+      "title": "이전 전사 기록",
+      "description": "여기에서 모든 이전 전사 기록에 접근하고 검색할 수 있습니다."
+    },
+    "skip": "투어 건너뛰기",
+    "next": "다음",
+    "finish": "시작하기"
+  },
+  "modelStatus": {
+    "cached": "다운로드됨",
+    "ram": "RAM:",
+    "storage": "저장 공간:",
+    "accuracy": "정확도",
+    "downloadProgress": "{{progress}}%",
+    "lightweight": "가벼움"
+  },
+  "models": {
+    "searchPlaceholder": "모델 검색...",
+    "noResults": "모델을 찾을 수 없습니다.",
+    "filteredByLanguage": "언어로 모델 필터링됨",
+    "groups": {
+      "general": "일반 모델",
+      "specialized": "선택한 언어에 특화됨"
+    },
+    "filters": {
+      "accuracy": "정확도",
+      "clear": "필터 지우기",
+      "recommended": "추천",
+      "search": "검색",
+      "weight": "가벼움"
+    },
+    "base": {
+      "badge": "다국어",
+      "description": "빠름",
+      "details": "낮은 메모리로 안정적인 자막 생성. 일상 사용에 적합.",
+      "label": "Whisper 기본"
+    },
+    "base_en": {
+      "badge": "영어 전용",
+      "description": "빠름",
+      "details": "낮은 메모리로 안정적인 영어 자막 생성. 일상 사용에 적합.",
+      "label": "Whisper 기본"
+    },
+    "englishOnly": {
+      "description": "영어 자막 정확도가 높은 영어 전용 모델을 표시합니다.",
+      "title": "영어 전용 모델"
+    },
+    "large_v3": {
+      "badge": "다국어",
+      "description": "최고 정확도",
+      "details": "복잡한 오디오에 최고의 정확도를 제공하지만 느리고 많은 메모리가 필요합니다.",
+      "label": "Whisper 대형"
+    },
+    "large_v3_turbo": {
+      "badge": "다국어",
+      "description": "빠르고 정확",
+      "details": "Large 모델보다 빠른 속도로 우수한 정확도, 적당한 메모리 사용.",
+      "label": "Whisper 대형 터보"
+    },
+    "diarize": {
+      "badge": "화자 라벨",
+      "description": "화자 라벨링 번들",
+      "details": "화자 분리 및 라벨링에 사용됩니다.",
+      "label": "화자 분리 모델"
+    },
+    "manage": {
+      "confirmBody": "{{model}} 모델을 기기에서 삭제합니다. 나중에 이 모델을 사용하면 다시 다운로드해야 합니다.",
+      "confirmTitle": "정말 삭제하시겠습니까?",
+      "deleteModel": "모델 삭제",
+      "description": "캐시된 모델을 삭제하여 디스크 공간을 확보하세요.",
+      "empty": "다운로드된 모델이 없습니다",
+      "title": "모델"
+    },
+    "moonshine_base": {
+      "badge": "영어 전용",
+      "description": "빠르고 정확",
+      "details": "Moonshine Tiny보다 높은 정확도의 빠른 온디바이스 영어 자막 생성.",
+      "label": "Moonshine 기본"
+    },
+    "moonshine_base_es": {
+      "badge": "스페인어",
+      "description": "빠르고 정확",
+      "details": "좋은 정확도의 빠른 온디바이스 스페인어 자막 생성.",
+      "label": "Moonshine 기본"
+    },
+    "moonshine_tiny": {
+      "badge": "영어 전용",
+      "description": "초고속",
+      "details": "최소 리소스로 초고속 온디바이스 영어 자막 생성. 실시간 사용에 최적.",
+      "label": "Moonshine 초소형"
+    },
+    "moonshine_tiny_ar": {
+      "badge": "아랍어",
+      "description": "초고속",
+      "details": "최소 리소스로 빠른 온디바이스 아랍어 자막 생성.",
+      "label": "Moonshine 초소형"
+    },
+    "moonshine_tiny_ja": {
+      "badge": "일본어",
+      "description": "초고속",
+      "details": "최소 리소스로 빠른 온디바이스 일본어 자막 생성.",
+      "label": "Moonshine 초소형"
+    },
+    "moonshine_tiny_ko": {
+      "badge": "한국어",
+      "description": "초고속",
+      "details": "최소 리소스로 빠른 온디바이스 한국어 자막 생성.",
+      "label": "Moonshine 초소형"
+    },
+    "moonshine_tiny_uk": {
+      "badge": "우크라이나어",
+      "description": "초고속",
+      "details": "최소 리소스로 빠른 온디바이스 우크라이나어 자막 생성.",
+      "label": "Moonshine 초소형"
+    },
+    "moonshine_tiny_vi": {
+      "badge": "베트남어",
+      "description": "초고속",
+      "details": "최소 리소스로 빠른 온디바이스 베트남어 자막 생성.",
+      "label": "Moonshine 초소형"
+    },
+    "moonshine_tiny_zh": {
+      "badge": "중국어",
+      "description": "초고속",
+      "details": "최소 리소스로 빠른 온디바이스 중국어 자막 생성.",
+      "label": "Moonshine 초소형"
+    },
+    "medium": {
+      "badge": "다국어",
+      "description": "정확",
+      "details": "적당한 속도와 메모리로 높은 정확도. 어려운 오디오에 적합.",
+      "label": "Whisper 중형"
+    },
+    "medium_en": {
+      "badge": "영어 전용",
+      "description": "정확",
+      "details": "적당한 속도로 높은 영어 정확도. 어려운 오디오에 적합.",
+      "label": "Whisper 중형"
+    },
+    "parakeet": {
+      "badge": "유럽어",
+      "description": "빠르고 정확",
+      "details": "유럽 언어에 대한 우수한 정확도와 속도.",
+      "label": "Parakeet"
+    },
+    "small": {
+      "badge": "다국어",
+      "description": "균형",
+      "details": "적당한 메모리로 속도와 정확도의 균형. 다양한 억양에 잘 대응.",
+      "label": "Whisper 소형"
+    },
+    "small_en": {
+      "badge": "영어 전용",
+      "description": "균형",
+      "details": "적당한 메모리로 속도와 영어 정확도의 균형. 다양한 억양에 대응.",
+      "label": "Whisper 소형"
+    },
+    "tiny": {
+      "badge": "다국어",
+      "description": "초고속",
+      "details": "최소 메모리로 가장 빠른 자막 생성. 빠른 초안에 최적.",
+      "label": "Whisper 초소형"
+    },
+    "tiny_en": {
+      "badge": "영어 전용",
+      "description": "초고속",
+      "details": "최소 메모리로 가장 빠른 영어 자막 생성. 빠른 초안에 최적.",
+      "label": "Whisper 초소형"
+    }
+  },
+  "progressSteps": {
+    "download": "모델 다운로드 중",
+    "diarize": "화자 식별 중",
+    "processing": "처리 중",
+    "transcribe": "음성을 텍스트로 변환 중",
+    "translate": "{{language}}(으)로 번역 중",
+    "normaliseAudio": "오디오 정규화 중",
+    "preparingAudio": "오디오 준비 중...",
+    "export": "내보내기"
+  },
+  "settings": {
+    "description": "AutoSubs 환경설정 및 옵션을 구성합니다.",
+    "dtw": {
+      "description": "단어 수준 타이밍 정확도 향상",
+      "title": "동적 시간 왜곡"
+    },
+    "restartOnboarding": "온보딩 다시 시작",
+    "openLogsFolder": "로그 폴더 열기",
+    "gpu": {
+      "description": "GPU를 사용하여 빠른 자막 생성",
+      "title": "GPU 가속"
+    },
+    "reset": {
+      "button": "설정 초기화",
+      "confirm": "자막 설정을 포함한 모든 설정을 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+      "confirmTitle": "설정 초기화"
+    },
+    "sections": {
+      "language": "언어",
+      "transcription": "자막 생성"
+    },
+    "support": {
+      "supportAutoSubs": "AutoSubs 지원",
+      "viewSource": "기여하기"
+    },
+    "title": "설정",
+    "uiLanguage": {
+      "description": "메뉴 및 버튼 업데이트",
+      "title": "앱 언어"
+    }
+  },
+  "speakerEditor": {
+    "colors": {
+      "fill": "채우기",
+      "outline": "윤곽선"
+    },
+    "description": "오디오에서 감지된 화자입니다.",
+    "name": "이름",
+    "namePlaceholder": "화자 이름 입력",
+    "outputTrack": "출력 트랙",
+    "title": "화자 편집"
+  },
+  "subtitles": {
+    "addToTimeline": "타임라인에 추가",
+    "empty": {
+      "noSubtitlesAvailable": "전사가 완료되면 여기에 자막이 표시됩니다"
+    },
+    "jumpToTimeline": "타임라인의 해당 지점으로 이동",
+    "loading": "자막 불러오는 중...",
+    "reformat": "재포맷",
+    "search": {
+      "caseMatch": "대소문자 일치",
+      "replaceAll": "모두 바꾸기",
+      "replaceWithPlaceholder": "다음으로 바꾸기...",
+      "wholeWord": "전체 단어"
+    },
+    "searchAria": "자막 검색",
+    "searchPlaceholder": "자막 검색...",
+    "speakers": "화자",
+    "title": "자막",
+    "unknownSpeaker": "알 수 없는 화자",
+    "previousSubtitles": "자막 기록",
+    "waitingForSubtitles": "자막을 기다리는 중..."
+  },
+  "theme": {
+    "toggle": "테마 전환"
+  },
+  "titlebar": {
+    "subtitleHistory": {
+      "title": "자막 기록",
+      "searchPlaceholder": "자막 기록 검색...",
+      "loading": "불러오는 중...",
+      "empty": "전사된 내용이 없습니다.",
+      "no_results": "결과 없음",
+      "delete_title": "전사 내용을 삭제할까요?",
+      "delete_description": "기록에서 전사 내용이 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다."
+    },
+    "update": {
+      "downloading": "업데이트 다운로드 중",
+      "installing": "업데이트 설치 중",
+      "restarting": "AutoSubs 다시 시작 중",
+      "installUpdateNow": "설치 후 다시 시작",
+      "newVersionAvailable": "업데이트 사용 가능"
+    },
+    "resolve": {
+      "productName": "DaVinci Resolve",
+      "description": "워크스페이스 스크립트 통합",
+      "tooltip": {
+        "canGetAudio": "타임라인에서 오디오를 가져오고 자막을 추가할 수 있습니다.",
+        "cantConnect": "타임라인에 연결할 수 없습니다",
+        "connected": "연결됨",
+        "openResolve": "DaVinci Resolve를 열고 작업 공간 → 스크립트 → AutoSubs로 이동하세요"
+      }
+    },
+    "premiere": {
+      "productName": "Premiere Pro",
+      "description": "Adobe 확장 프로그램 통합",
+      "tooltip": {
+        "connected": "연결됨",
+        "canGetAudio": "타임라인에서 오디오를 가져오고 자막을 추가할 수 있습니다.",
+        "disconnected": "확장 프로그램 연결 끊김",
+        "openPremiere": "자동으로 연결하려면 Premiere Pro를 여십시오."
+      }
+    },
+    "aftereffects": {
+      "productName": "After Effects",
+      "description": "Adobe 확장 프로그램 통합",
+      "tooltip": {
+        "connected": "연결됨",
+        "canGetAudio": "컴포지션에서 오디오를 가져오고 자막을 다시 추가할 수 있습니다.",
+        "disconnected": "확장 프로그램 연결 끊김",
+        "openAfterEffects": "자동으로 연결하려면 After Effects를 엽니다."
+      }
+    },
+    "status": {
+      "disconnected": "연결 끊김"
+    }
+  },
+  "addToTimeline": {
+    "steps": {
+      "outputTrack": {
+        "title": "트랙"
+      },
+      "template": {
+        "title": "스타일"
+      },
+      "speakers": {
+        "title": "화자"
+      }
+    },
+    "conflict": {
+      "hasConflicts": "이 트랙에 충돌하는 클립이 있습니다. 자막이 기존 콘텐츠와 겹칠 수 있습니다."
+    },
+    "adding": "추가하는 중...",
+    "success": "타임라인에 추가됨",
+    "title": "타임라인에 추가",
+    "ready": {
+      "title": "자막 준비 완료",
+      "description": "자막이 생성되어 타임라인에 추가할 준비가 되었습니다."
+    },
+    "mode": {
+      "regular": "일반",
+      "animated": "애니메이션"
+    },
+    "preset": {
+      "new": "새 프리셋",
+      "builtIn": "내장됨",
+      "custom": "사용자 정의",
+      "preview": "Resolve에서 미리보기",
+      "duplicate": "복제",
+      "delete": "삭제",
+      "export": "JSON 내보내기",
+      "copyJson": "JSON 복사",
+      "copied": "클립보드에 복사됨",
+      "import": "파일 가져오기",
+      "paste": "JSON 붙여넣기",
+      "phase": {
+        "launchingTitle": "Resolve에서 자막 열기 중…",
+        "launchingHint": "임시 트랙에 미리보기 자막을 배치합니다.",
+        "editingTitle": "DaVinci Resolve로 전환",
+        "editingBody": "새 트랙에 자막이 배치되고 Fusion 페이지에서 열렸습니다. 검사기를 사용하여 사용자 정의한 후 여기로 돌아오세요.",
+        "capturingTitle": "Resolve에서 설정 읽기 중…",
+        "nameTitle": "프리셋 이름 지정",
+        "nameHint": "짧고 설명적인 이름을 지정하세요."
+      },
+      "action": {
+        "cancel": "취소",
+        "save": "프리셋 저장",
+        "back": "뒤로",
+        "captureSettings": "설정 캡처"
+      },
+      "nameLabel": "프리셋 이름",
+      "namePlaceholder": "예: 굵은 노란색, 틱톡 스타일",
+      "descriptionLabel": "설명",
+      "descriptionPlaceholder": "이 프리셋에 대한 선택적 메모",
+      "confirmDeleteTitle": "프리셋을 삭제하시겠습니까?",
+      "confirmDelete": "이 프리셋이 라이브러리에서 제거됩니다. 내장 프리셋은 영향을 받지 않습니다.",
+      "confirmDeleteConfirm": "삭제",
+      "importTitle": "프리셋 JSON 붙여넣기",
+      "importPlaceholder": "프리셋 파일 내용을 여기에 붙여넣으세요…",
+      "importSubmit": "프리셋 가져오기",
+      "errors": {
+        "invalidJson": "유효한 프리셋 파일처럼 보이지 않습니다.",
+        "captureFailed": "Resolve에서 자막 설정을 읽을 수 없습니다.",
+        "nameRequired": "이름을 입력하세요."
+      }
+    }
+  },
+  "replaceStrings": {
+    "find": "찾기",
+    "findPlaceholder": "찾을 텍스트...",
+    "matchCase": "대소문자 일치",
+    "noOccurrencesFound": "일치하는 항목이 없습니다",
+    "occurrencePosition": "{{current}} / {{total}}",
+    "occurrencesFound": "{{count}}개 항목 찾음",
+    "replaceAll": "모두 바꾸기 ({{count}})",
+    "replaceCurrent": "현재 항목 바꾸기",
+    "replacePlaceholder": "바꿀 텍스트...",
+    "replaceWith": "다음으로 바꾸기",
+    "title": "단어 찾기/바꾸기"
+  }
+}

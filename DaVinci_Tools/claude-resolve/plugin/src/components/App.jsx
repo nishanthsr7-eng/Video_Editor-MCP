@@ -1,0 +1,185 @@
+import React, { useState, useRef, useEffect } from 'react';
+import TitleBar from './TitleBar';
+import Chat from './Chat';
+import ChatInput from './ChatInput';
+import Sidebar from './Sidebar';
+import WelcomeScreen from './WelcomeScreen';
+
+function tryParseStandardHTML(text) {
+    const htmlMatch = text.match(/```html\s*\n(?:(?:\/\/|<!--)\s*FILE:\s*(\S+\.html)(?:\s*-->)?\s*\n)?([\s\S]*?)```/);
+    if (!htmlMatch) return null;
+    const html = htmlMatch[2].trim();
+    if (!html.includes('getAnimationDuration')) return null;
+    const hasFrame = html.includes('renderFrame');
+    const hasReact = html.includes('ReactDOM.createRoot');
+    if (!hasFrame && !hasReact) return null;
+    const mode = hasFrame ? 'frame' : 'realtime';
+    const name = htmlMatch[1]?.replace('.html', '') || 'Overlay';
+    return { type: 'html', name, html, mode };
+}
+
+export default function App() {
+    const [authState, setAuthState] = useState('checking');
+    const [welcomed, setWelcomed] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [config, setConfig] = useState({ fps: 25, width: 1920, height: 1080 });
+    const [messages, setMessages] = useState([]);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [activeTool, setActiveTool] = useState(null);
+    const [tokenCount, setTokenCount] = useState(0);
+    const [updateAvailable, setUpdateAvailable] = useState(false);
+    const nextId = useRef(0);
+
+    useEffect(() => {
+        function appendToLast(data) {
+            setMessages(prev => {
+                const last = prev[prev.length - 1];
+                if (!last || last.type !== 'assistant') return prev;
+                const updated = [...prev];
+                const msg = { ...last };
+                if (msg.isThinking) {
+                    msg.isThinking = false;
+                    msg.text = '';
+                }
+                msg.text += data;
+                updated[updated.length - 1] = msg;
+                return updated;
+            });
+        }
+
+        window.claudeAPI.onOutput((data) => {
+            setActiveTool(null);
+            appendToLast(data);
+        });
+        window.claudeAPI.onError(appendToLast);
+
+        window.claudeAPI.onStatus((data) => {
+            if (data.type === 'tool') {
+                setActiveTool({ name: data.name, file: data.file });
+            } else if (data.type === 'tokens') {
+                setTokenCount(data.output);
+            }
+        });
+
+        window.claudeAPI.onDone((code) => {
+            setMessages(prev => {
+                const last = prev[prev.length - 1];
+                if (!last || last.type !== 'assistant') return prev;
+                const updated = [...prev];
+                const msg = { ...last };
+                if (msg.isThinking) {
+                    msg.isThinking = false;
+                    msg.text = code === 2 ? '(Stopped)' : '(No response)';
+                } else if (code === 2) {
+                    msg.text += '\n(Stopped)';
+                }
+                if (code === 1) msg.isError = true;
+                if (code === 0) msg.parsed = tryParseStandardHTML(msg.text);
+                updated[updated.length - 1] = msg;
+                return updated;
+            });
+            setActiveTool(null);
+            setIsProcessing(false);
+        });
+
+        window.overlayAPI.syncToMediaPool().catch(() => {});
+        window.configAPI.get().then(setConfig);
+
+        window.claudeAPI.checkAuth().then((result) => {
+            setAuthState(result.status);
+        });
+
+        window.updatesAPI.check()
+            .then(r => setUpdateAvailable(!!(r && r.hasUpdate)))
+            .catch(() => {});
+
+        function handleUnload() {
+            window.resolveAPI.cleanup();
+        }
+        window.addEventListener('beforeunload', handleUnload);
+        return () => window.removeEventListener('beforeunload', handleUnload);
+    }, []);
+
+    function handleSend(text) {
+        setWelcomed(false);
+        const userId = nextId.current++;
+        const assistantId = nextId.current++;
+        setMessages(prev => [
+            ...prev,
+            { id: userId, type: 'user', text },
+            { id: assistantId, type: 'assistant', text: 'Thinking...', isThinking: true, isError: false, parsed: null }
+        ]);
+        setIsProcessing(true);
+        setActiveTool(null);
+        setTokenCount(0);
+        window.claudeAPI.sendPrompt(text);
+    }
+
+    function handleStop() {
+        window.claudeAPI.abort();
+    }
+
+    async function handleConfigChange(partial) {
+        const updated = await window.configAPI.set(partial);
+        const needsRestart =
+            (partial.model && partial.model !== config.model) ||
+            (partial.effort && partial.effort !== config.effort);
+        setConfig(updated);
+        if (needsRestart && !welcomed) {
+            setMessages([]);
+            setIsProcessing(false);
+            setActiveTool(null);
+            window.claudeAPI.restart();
+        }
+    }
+
+    // Sidebar closed → narrow window; open → wide window.
+    function applySidebar(next) {
+        setSidebarOpen(next);
+        window.windowAPI.resize({ width: next ? 720 : 500, height: 700 }).catch(() => {});
+    }
+
+    const showWelcome = authState !== 'ready' || welcomed;
+
+    return (
+        <>
+            <div className="accent-strip" />
+            <TitleBar />
+            <div className={'body' + (sidebarOpen ? ' sidebar-open' : '')}>
+                {sidebarOpen && (
+                    <Sidebar
+                        config={config}
+                        onConfigChange={handleConfigChange}
+                    />
+                )}
+                <div className="main">
+                    {showWelcome ? (
+                        <WelcomeScreen
+                            authState={authState}
+                            onAuthStateChange={setAuthState}
+                            onStart={() => setAuthState('ready')}
+                            onPrompt={handleSend}
+                            onDismiss={() => setWelcomed(false)}
+                        />
+                    ) : (
+                        <Chat
+                            messages={messages}
+                            activeTool={activeTool}
+                            tokenCount={tokenCount}
+                            model={config.model}
+                            config={config}
+                        />
+                    )}
+                    <ChatInput
+                        onSend={handleSend}
+                        onStop={handleStop}
+                        isProcessing={isProcessing}
+                        sidebarOpen={sidebarOpen}
+                        onToggleSidebar={() => applySidebar(!sidebarOpen)}
+                        updateAvailable={updateAvailable}
+                    />
+                </div>
+            </div>
+        </>
+    );
+}

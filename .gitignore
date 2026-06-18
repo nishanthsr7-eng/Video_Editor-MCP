@@ -1,0 +1,129 @@
+# ─────────────────────────────────────────────
+#  Media — never committed
+# ─────────────────────────────────────────────
+
+# User source footage and generated outputs
+Sources/
+Output/
+
+# ─────────────────────────────────────────────
+#  Large binary / model files
+# ─────────────────────────────────────────────
+
+# Root model folder (isnet-anime.onnx, u2net.onnx)
+Model/
+
+# ONNX weights bundled inside character extractor
+Tools/Character_Extractor_MCP/models/
+
+# Real-ESRGAN Windows binary, DLLs, and model weights
+Tools/RealESRGAN/realesrgan-ncnn-vulkan.exe
+Tools/RealESRGAN/*.dll
+Tools/RealESRGAN/models/
+
+# Generic patterns — catch any model weights added in future
+*.onnx
+*.bin
+*.param
+*.pt
+*.pth
+*.gguf
+*.safetensors
+
+# ─────────────────────────────────────────────
+#  Python — virtual environments and cache
+# ─────────────────────────────────────────────
+
+# uv-managed venvs (one per Tools/* folder)
+.venv/
+**/.venv/
+
+# Python bytecode
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Egg / dist build artifacts
+*.egg-info/
+dist/
+build/
+
+# ─────────────────────────────────────────────
+#  Node.js (auto-subs Adobe extension, claude-resolve plugin)
+# ─────────────────────────────────────────────
+
+node_modules/
+**/node_modules/
+
+# Build output from Vite/TypeScript projects
+DaVinci_Tools/auto-subs/Adobe-Extension/dist/
+DaVinci_Tools/auto-subs/AutoSubs-App/dist/
+DaVinci_Tools/claude-resolve/plugin/dist/
+
+# ─────────────────────────────────────────────
+#  MCP server config — contains local paths
+# ─────────────────────────────────────────────
+
+.mcp.json
+.mcp.full.json.bak
+
+# ─────────────────────────────────────────────
+#  Logs
+# ─────────────────────────────────────────────
+
+*.log
+
+# ─────────────────────────────────────────────
+#  DaVinci Resolve — runtime and project files
+# ─────────────────────────────────────────────
+
+# Resolve project database files (machine-specific)
+*.drp
+*.resolve
+
+# vidstab temporary file produced during stabilization
+vidt.trf
+
+# ─────────────────────────────────────────────
+#  OS noise
+# ─────────────────────────────────────────────
+
+# Windows
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ─────────────────────────────────────────────
+#  Editor / IDE
+# ─────────────────────────────────────────────
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ─────────────────────────────────────────────
+#  What IS tracked (reference)
+# ─────────────────────────────────────────────
+#
+#  Tools/**/pyproject.toml   — dependency declarations
+#  Tools/**/uv.lock          — pinned dependency lockfiles
+#  Tools/**/*.py             — all MCP server source code
+#  Tools/Text_Overlay_MCP/fonts/   — bundled OFL fonts (small TTFs)
+#  Tools/LUT_Grading_MCP/**/luts/  — bundled .cube LUT presets (text files)
+#  DaVinci_Scripts/**        — Fusion templates (.setting) and Lua scripts
+#  DaVinci_Tools/**          — resolve-scripts, auto-subs, claude-resolve, etc.
+#  *.md                      — all documentation
+#  Workflow.txt              — internal tool reference
+#  davinci_amv_builder.py    — DaVinci scripting bridge
+#  edit_composer.py          — ffmpeg edit compositor
+#  batch_rembg.py            — batch background removal helper
+#  manage-scripts.ps1        — DaVinci asset installer

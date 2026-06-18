@@ -1,0 +1,95 @@
+import { useTranslation } from "react-i18next";
+import { Trash2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ask } from "@tauri-apps/plugin-dialog";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Model } from "@/types";
+
+interface ManageModelsDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  models: Model[];
+  onDeleteModel: (modelValue: string) => void;
+}
+
+export function ManageModelsDialog({
+  open,
+  onOpenChange,
+  models,
+  onDeleteModel
+}: ManageModelsDialogProps) {
+  const { t } = useTranslation();
+  const downloadedModels = models.filter(model => model.isDownloaded);
+
+  const handleDeleteModel = async (modelValue: string) => {
+    const modelName = t(models.find((m) => m.value === modelValue)?.label || "");
+    const shouldDelete = await ask(t("models.manage.confirmBody", { model: modelName }), {
+      title: t("models.manage.confirmTitle"),
+      kind: "warning"
+    });
+    
+    if (shouldDelete) {
+      onDeleteModel(modelValue);
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>
+            <span className="inline-flex items-center gap-2 align-middle">
+              <span>{t("models.manage.title")}</span>
+              <Badge variant="default" className="h-5 shadow-none">{downloadedModels.length}</Badge>
+            </span>
+          </DialogTitle>
+          <DialogDescription>
+            {t("models.manage.description")}
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="space-y-3 max-h-[340px] overflow-y-auto">
+          {downloadedModels.length === 0 ? (
+            <p className="text-center text-muted-foreground py-8">
+              {t("models.manage.empty")}
+            </p>
+          ) : (
+            downloadedModels.map((model) => (
+              <div key={model.value} className="flex items-center justify-between p-3 border rounded-lg">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={model.image}
+                    alt={t(model.label)}
+                    className="size-9 object-contain rounded"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="font-medium text-sm">{t(model.label)}</p>
+                      <Badge variant="secondary" className="text-[10px] px-1.5 py-0">{t(model.badge)}</Badge>
+                    </div>
+                    <p className="text-xs text-muted-foreground">{model.size}</p>
+                  </div>
+                </div>
+                <Button
+                  variant="destructive"
+                  size="icon"
+                  title={t("models.manage.deleteModel")}
+                  onClick={() => handleDeleteModel(model.value)}
+                >
+                  <Trash2 className="size-4" />
+                </Button>
+              </div>
+            ))
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}

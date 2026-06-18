@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="grad" gradientUnits="userSpaceOnUse" x1="80" y1="430" x2="430" y2="80">
+      <stop offset="0%" stop-color="#E8843A"/>
+      <stop offset="35%" stop-color="#D4A44C"/>
+      <stop offset="65%" stop-color="#80C499"/>
+      <stop offset="100%" stop-color="#4CC9B0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="64" ry="64" fill="#1A1A1C"/>
+
+  <g transform="translate(256,256)" stroke="url(#grad)" stroke-linecap="round" fill="none">
+
+    <!-- Central ring -->
+    <circle cx="0" cy="0" r="94" stroke-width="17"/>
+
+    <!-- Left connector + node -->
+    <line x1="-110" y1="0" x2="-168" y2="0" stroke-width="13"/>
+    <circle cx="-186" cy="0" r="20" fill="url(#grad)" stroke="none"/>
+
+    <!-- Right connector + node -->
+    <line x1="110" y1="0" x2="168" y2="0" stroke-width="13"/>
+    <circle cx="184" cy="0" r="16" fill="url(#grad)" stroke="none"/>
+
+    <!-- Vertical rays -->
+    <line x1="0" y1="-118" x2="0" y2="-192" stroke-width="14"/>
+    <line x1="0" y1="118" x2="0" y2="192" stroke-width="14"/>
+
+    <!-- Diagonal rays -->
+    <line x1="-84" y1="-84" x2="-130" y2="-130" stroke-width="14"/>
+    <line x1="84" y1="-84" x2="130" y2="-130" stroke-width="14"/>
+    <line x1="-84" y1="84" x2="-130" y2="130" stroke-width="14"/>
+    <line x1="84" y1="84" x2="130" y2="130" stroke-width="14"/>
+
+  </g>
+</svg>

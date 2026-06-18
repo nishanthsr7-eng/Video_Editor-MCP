@@ -1,0 +1,172 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "cli:default",
+    "updater:default",
+    "shell:allow-open",
+    "clipboard-manager:allow-write-text",
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "https://*.tauri.app"
+        },
+        {
+          "url": "http://localhost:*"
+        },
+        {
+          "url": "http://127.0.0.1:*"
+        },
+        {
+          "url": "https://huggingface.co/*"
+        },
+        {
+          "url": "https://cdn-lfs.huggingface.co/*"
+        },
+        {
+          "url": "https://cdn-lfs-us-1.huggingface.co/*"
+        },
+        {
+          "url": "https://docs.google.com/*"
+        }
+      ],
+      "deny": [
+        {
+          "url": "https://private.tauri.app"
+        }
+      ]
+    },
+    "fs:default",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        {
+          "path": "$DOCUMENT/**"
+        },
+        {
+          "path": "$DOWNLOAD/**"
+        },
+        {
+          "path": "$APPLOCALDATA/**"
+        },
+        {
+          "path": "$VIDEO/**"
+        }
+      ]
+    },
+    "fs:allow-resource-read-recursive",
+    {
+      "identifier": "fs:allow-write-text-file",
+      "allow": [
+        {
+          "path": "$DOCUMENT/**"
+        },
+        {
+          "path": "$APPLOCALDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        {
+          "path": "$DOCUMENT/**"
+        },
+        {
+          "path": "$APPLOCALDATA/**"
+        },
+        {
+          "path": "$VIDEO/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-rename",
+      "allow": [
+        {
+          "path": "$DOCUMENT/**"
+        },
+        {
+          "path": "$APPLOCALDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-copy-file",
+      "allow": [
+        {
+          "path": "$DOCUMENT/**"
+        },
+        {
+          "path": "$APPLOCALDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-remove",
+      "allow": [
+        {
+          "path": "$DOCUMENT/**"
+        },
+        {
+          "path": "$APPLOCALDATA/**"
+        }
+      ]
+    },
+    "dialog:default",
+    {
+      "identifier": "dialog:allow-save",
+      "allow": [
+        {
+          "path": "$DESKTOP/*"
+        },
+        {
+          "path": "$DOCUMENT/*"
+        },
+        {
+          "path": "$DOWNLOAD/*"
+        }
+      ]
+    },
+    "store:default",
+    "core:window:default",
+    {
+      "identifier": "core:window:allow-close"
+    },
+    {
+      "identifier": "core:window:allow-start-dragging"
+    },
+    {
+      "identifier": "core:window:allow-minimize"
+    },
+    {
+      "identifier": "core:window:allow-toggle-maximize"
+    },
+    "core:webview:allow-set-webview-zoom",
+    "process:default",
+    "shell:default",
+    "os:default",
+    {
+      "identifier": "opener:allow-open-path",
+      "allow": [
+        { "path": "$APPLOG/**" },
+        { "path": "$APPDATA/**" },
+        { "path": "$APPCACHE/**" },
+        { "path": "$APPLOCALDATA/**" }
+      ]
+    },
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
+        { "url": "https://github.com/tmoroney/auto-subs" },
+        { "url": "https://github.com/tmoroney/auto-subs/*" }
+      ]
+    }
+  ]
+}

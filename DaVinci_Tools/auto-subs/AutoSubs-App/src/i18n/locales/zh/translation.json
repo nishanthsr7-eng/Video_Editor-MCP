@@ -1,0 +1,563 @@
+{
+  "settings": {
+    "title": "设置",
+    "description": "配置您的 AutoSubs 偏好和选项。",
+    "sections": {
+      "transcription": "转录",
+      "language": "语言"
+    },
+    "gpu": {
+      "title": "GPU 加速",
+      "description": "利用 GPU 进行更快的转录"
+    },
+    "dtw": {
+      "title": "动态时间规整",
+      "description": "提高词级时间准确性"
+    },
+    "uiLanguage": {
+      "title": "应用语言",
+      "description": "更新菜单和按钮"
+    },
+    "restartOnboarding": "重新开始入门",
+    "openLogsFolder": "打开日志文件夹",
+    "reset": {
+      "button": "重置设置",
+      "confirm": "您确定要将所有设置重置为默认值吗？此操作无法撤销。",
+      "confirmTitle": "重置设置"
+    },
+    "support": {
+      "supportAutoSubs": "支持 AutoSubs",
+      "viewSource": "查看源代码"
+    }
+  },
+  "common": {
+    "close": "关闭",
+    "cancel": "取消",
+    "back": "返回",
+    "next": "下一步",
+    "apply": "应用",
+    "add": "添加",
+    "done": "完成",
+    "delete": "删除",
+    "generateSubtitles": "生成",
+    "startNewTranscription": "开始新转录",
+    "refresh": "刷新连接"
+  },
+  "update": {
+    "restartResolveServer": {
+      "title": "更新已安装",
+      "description": "AutoSubs 已重新启动并与 Resolve 断开连接。请在 DaVinci Resolve 中再次运行 Workspace -> Scripts -> AutoSubs，以启动更新后的 Lua 服务器。"
+    }
+  },
+  "importExport": {
+    "button": "导出 / 导入",
+    "importTab": "导入",
+    "exportTab": "导出",
+    "dropHere": "将文件拖放到此处或点击选择",
+    "supportsSrt": "支持 .srt 文件",
+    "selected": "已选择：",
+    "importFile": "导入文件",
+    "exportAsSrt": "导出为 SRT",
+    "downloadFormat": "下载 {{format}}",
+    "fileDialog": {
+      "subtitleFiles": "字幕文件"
+    },
+    "exportFormats": {
+      "srt": {
+        "title": "字幕 (.srt)",
+        "description": "适用于 YouTube、VLC 等应用的标准字幕格式，包含时间戳。"
+      },
+      "txt": {
+        "title": "转录文本 (.txt)",
+        "description": "适用于 LLM 的纯文本导出，在可用时包含说话人标签。"
+      }
+    }
+  },
+  "actionBar": {
+    "source": "来源",
+    "options": "选项",
+    "subtitleStyle": "字幕样式",
+    "subtitleStyleDescription": "字幕",
+    "model": "模型",
+    "common": {
+      "auto": "自动",
+      "off": "关闭"
+    },
+    "mode": {
+      "fileInput": "文件输入",
+      "timeline": "时间线"
+    },
+    "format": {
+      "removePunctuationTitle": "移除标点符号",
+      "removePunctuationDescription": "移除逗号、句号等。",
+      "textCaseTitle": "文本大小写",
+      "textCaseDescription": "修改字幕大小写",
+      "textCase": {
+        "normal": "正常",
+        "lowercase": "小写",
+        "uppercase": "大写",
+        "titleCase": "标题大小写"
+      },
+      "lineCountTitle": "行数",
+      "lineCountDescription": "每个字幕的最大行数",
+      "textDensityTitle": "文本密度",
+      "textDensityDescription": "屏幕上的文本量",
+      "textDensity": {
+        "single": "单词",
+        "less": "较少",
+        "standard": "标准",
+        "more": "较多",
+        "custom": "自定义"
+      },
+      "customCharsTitle": "最大字符数",
+      "customCharsDescription": "每行字符数",
+      "customPromptButton": "提示",
+      "customPromptTitle": "词汇和上下文",
+      "customPromptDescription": "添加术语、名称或上下文以引导 Whisper。",
+      "customPromptPlaceholder": "例如：OpenAI, DaVinci Resolve — Resolve 字幕编辑教程。",
+      "customPromptLanguageWarning": "请使用与音频相同的语言书写 — 使用不同语言的提示可能导致转录错误。",
+      "customPromptWhisperOnly": "仅 Whisper 模型支持。"
+    },
+    "censor": {
+      "title": "审查词汇",
+      "wordCount": "{{count}} 个词",
+      "dialogTitle": "审查敏感词汇",
+      "dialogDescription": "添加要在字幕中审查的词汇。",
+      "inputPlaceholder": "添加要审查的词汇",
+      "empty": "暂无审查词汇。",
+      "lists": "词汇列表",
+      "customSection": "自定义词汇",
+      "customSectionDescription": "输入要审查的个别词汇。",
+      "listWordCount": "{{count}} 个词"
+    },
+    "speakers": {
+      "title": "说话人标签",
+      "description": "识别不同的说话人",
+      "countTitle": "说话人数量",
+      "disabled": "已禁用"
+    },
+    "tracks": {
+      "exportRange": {
+        "entire": "整个时间线",
+        "inout": "入点/出点"
+      },
+      "trackN": "轨道 {{n}}",
+      "countSelected": "已选择 {{count}} 个轨道",
+      "selectedLabel": "已选择 {{label}}",
+      "noneSelected": "未选择轨道",
+      "selectAll": "全选",
+      "clearAll": "清除全部",
+      "noneFound": "未找到音频轨道。",
+      "createTrack": "未找到时间线"
+    },
+    "fileDrop": {
+      "aria": "将音频文件拖放到此处或点击选择",
+      "prompt": "拖放文件或点击",
+      "supports": "支持大多数格式"
+    },
+    "fileDialog": {
+      "mediaFiles": "媒体文件（ffmpeg 支持）"
+    },
+    "language": {
+      "title": "语言",
+      "source": "源语言",
+      "translate": "翻译",
+      "searchSourcePlaceholder": "搜索语言...",
+      "searchTargetPlaceholder": "搜索目标语言...",
+      "noLanguageFound": "未找到语言。"
+    }
+  },
+  "speakerEditor": {
+    "title": "编辑说话人",
+    "description": "这些是在音频中检测到的说话人。",
+    "name": "姓名",
+    "namePlaceholder": "输入说话人姓名",
+    "outputTrack": "输出轨道",
+    "colors": {
+      "fill": "填充",
+      "outline": "轮廓"
+    }
+  },
+  "modelStatus": {
+    "cached": "已缓存",
+    "storage": "存储：",
+    "ram": "内存：",
+    "accuracy": "准确性",
+    "lightweight": "轻量级",
+    "downloadProgress": "{{progress}}%"
+  },
+  "models": {
+    "searchPlaceholder": "搜索模型...",
+    "noResults": "未找到模型。",
+    "filteredByLanguage": "根据语言筛选模型",
+    "groups": {
+      "specialized": "针对所选语言优化",
+      "general": "通用模型"
+    },
+    "filters": {
+      "weight": "轻量",
+      "accuracy": "准确性",
+      "recommended": "推荐",
+      "search": "搜索",
+      "clear": "清除筛选"
+    },
+    "englishOnly": {
+      "title": "英语专用模型",
+      "description": "显示专用的英语模型，英语转录准确性更高。"
+    },
+    "manage": {
+      "title": "管理已下载的模型",
+      "description": "删除缓存的模型以释放磁盘空间。",
+      "empty": "未找到已下载的模型",
+      "deleteModel": "删除模型",
+      "confirmTitle": "您确定吗？",
+      "confirmBody": "这将从您的设备中删除 {{model}} 模型。如果您将来使用此模型，需要重新下载。"
+    },
+    "diarize": {
+      "label": "说话人分离模型",
+      "description": "说话人标注包",
+      "details": "用于说话人分离和标注。",
+      "badge": "说话人标签"
+    },
+    "tiny": {
+      "label": "Whisper 微型",
+      "description": "超快速",
+      "details": "最快的转录，内存占用最小。适合快速草稿。",
+      "badge": "多语言"
+    },
+    "tiny_en": {
+      "label": "Whisper 微型",
+      "description": "超快速",
+      "details": "最快的英语转录，内存占用最小。适合快速草稿。",
+      "badge": "仅英语"
+    },
+    "base": {
+      "label": "Whisper 基础",
+      "description": "快速",
+      "details": "可靠的转录，内存要求低。适合日常使用。",
+      "badge": "多语言"
+    },
+    "base_en": {
+      "label": "Whisper 基础",
+      "description": "快速",
+      "details": "可靠的英语转录，内存要求低。适合日常使用。",
+      "badge": "仅英语"
+    },
+    "small": {
+      "label": "Whisper 小型",
+      "description": "平衡",
+      "details": "平衡的速度和准确性，内存占用适中。能很好地处理各种口音。",
+      "badge": "多语言"
+    },
+    "small_en": {
+      "label": "Whisper 小型",
+      "description": "平衡",
+      "details": "平衡的速度和英语准确性，内存占用适中。能处理各种口音。",
+      "badge": "仅英语"
+    },
+    "medium": {
+      "label": "Whisper 中型",
+      "description": "准确",
+      "details": "高准确性转录，速度和内存适中。适合具有挑战性的音频。",
+      "badge": "多语言"
+    },
+    "medium_en": {
+      "label": "Whisper 中型",
+      "description": "准确",
+      "details": "高准确性英语转录，速度适中。适合具有挑战性的音频。",
+      "badge": "仅英语"
+    },
+    "large_v3_turbo": {
+      "label": "Whisper 大型涡轮",
+      "description": "快速且准确",
+      "details": "优秀的准确性，比 Large 模型速度更快，内存占用适中。",
+      "badge": "多语言"
+    },
+    "large_v3": {
+      "label": "Whisper 大型",
+      "description": "最高准确性",
+      "details": "复杂音频的最高准确性，但速度较慢且需要大量内存。",
+      "badge": "多语言"
+    },
+    "parakeet": {
+      "label": "Parakeet（鹦鹉）",
+      "description": "快速且准确",
+      "details": "欧洲语言的出色准确性和速度。",
+      "badge": "欧洲语言"
+    },
+    "moonshine_tiny": {
+      "label": "Moonshine 微型",
+      "description": "超快速",
+      "details": "极快的本地英语转录，资源消耗极低。适合实时使用。",
+      "badge": "仅英语"
+    },
+    "moonshine_tiny_ar": {
+      "label": "Moonshine 微型",
+      "description": "超快速",
+      "details": "快速的本地阿拉伯语转录，资源消耗极低。",
+      "badge": "阿拉伯语"
+    },
+    "moonshine_tiny_zh": {
+      "label": "Moonshine 微型",
+      "description": "超快速",
+      "details": "快速的本地中文转录，资源消耗极低。",
+      "badge": "中文"
+    },
+    "moonshine_tiny_ja": {
+      "label": "Moonshine 微型",
+      "description": "超快速",
+      "details": "快速的本地日语转录，资源消耗极低。",
+      "badge": "日语"
+    },
+    "moonshine_tiny_ko": {
+      "label": "Moonshine 微型",
+      "description": "超快速",
+      "details": "快速的本地韩语转录，资源消耗极低。",
+      "badge": "韩语"
+    },
+    "moonshine_tiny_uk": {
+      "label": "Moonshine 微型",
+      "description": "超快速",
+      "details": "快速的本地乌克兰语转录，资源消耗极低。",
+      "badge": "乌克兰语"
+    },
+    "moonshine_tiny_vi": {
+      "label": "Moonshine 微型",
+      "description": "超快速",
+      "details": "快速的本地越南语转录，资源消耗极低。",
+      "badge": "越南语"
+    },
+    "moonshine_base": {
+      "label": "Moonshine 基础",
+      "description": "快速且准确",
+      "details": "快速的本地英语转录，比Moonshine Tiny精度更高。",
+      "badge": "仅英语"
+    },
+    "moonshine_base_es": {
+      "label": "Moonshine 基础",
+      "description": "快速且准确",
+      "details": "快速的本地西班牙语转录，精度良好。",
+      "badge": "西班牙语"
+    }
+  },
+  "completion": {
+    "processingComplete": "处理完成",
+    "subtitlesReady": "您的字幕已准备就绪！",
+    "noSpeechDetected": "未检测到语音。音频文件可能为静音或不包含可识别的语音。",
+    "viewSubtitles": "查看字幕",
+    "exportToFile": "导出到文件",
+    "addToTimeline": "添加到时间线"
+  },
+  "progressSteps": {
+    "download": "正在下载模型",
+    "diarize": "正在识别说话人",
+    "transcribe": "语音转文本",
+    "translate": "正在翻译为 {{language}}",
+    "normaliseAudio": "正在标准化音频",
+    "preparingAudio": "正在准备音频...",
+    "processing": "正在处理",
+    "export": "导出"
+  },
+  "subtitles": {
+    "title": "字幕",
+    "speakers": "说话人",
+    "reformat": "重新格式化",
+    "searchPlaceholder": "搜索字幕...",
+    "searchAria": "搜索字幕",
+    "search": {
+      "caseMatch": "区分大小写",
+      "wholeWord": "整词匹配",
+      "replaceAll": "全部替换",
+      "replaceWithPlaceholder": "替换为..."
+    },
+    "addToTimeline": "添加到时间线",
+    "loading": "正在加载字幕...",
+    "waitingForSubtitles": "正在等待字幕...",
+    "jumpToTimeline": "跳转到时间线上的点",
+    "unknownSpeaker": "未知说话人",
+    "previousSubtitles": "字幕历史",
+    "empty": {
+      "noSubtitlesAvailable": "转录完成后，字幕将显示在这里"
+    }
+  },
+  "gettingStarted": {
+    "title": "欢迎使用 AutoSubs",
+    "description": "选择您使用的语言。它将用作界面语言（如有）和转录语言。",
+    "selectLanguage": "选择语言",
+    "searchLanguage": "搜索语言...",
+    "noLanguageFound": "未找到语言。",
+    "resolveNote": {
+      "openResolve": "打开 DaVinci Resolve 并前往：",
+      "workspace": "Workspace（顶部菜单）",
+      "scripts": "Scripts",
+      "autosubs": "AutoSubs"
+    },
+    "continue": "开始使用"
+  },
+  "tour": {
+    "connection": {
+      "title": "连接状态",
+      "description": "显示 AutoSubs 是否已连接到 DaVinci Resolve。绿色表示已连接，可以访问时间线。"
+    },
+    "modeSwitcher": {
+      "title": "输入模式",
+      "description": "切换直接转录文件，或从 DaVinci Resolve 时间线提取音频。"
+    },
+    "modelPicker": {
+      "title": "AI 模型",
+      "description": "选择语音识别模型。已自动选择支持您所用语言的模型。不同模型在速度与准确度之间有所权衡。"
+    },
+    "audioInput": {
+      "title": "音频来源",
+      "description": "从 Resolve 时间线中选择音频轨道，或将媒体文件拖放到此处直接转录。"
+    },
+    "controls": {
+      "title": "转录控制",
+      "description": "配置语言、说话人识别、文本格式，然后点击生成字幕以开始。"
+    },
+    "history": {
+      "title": "历史转录",
+      "description": "在此处访问和搜索您所有的历史转录记录。"
+    },
+    "skip": "跳过导览",
+    "next": "下一步",
+    "finish": "开始使用"
+  },
+  "titlebar": {
+    "subtitleHistory": {
+      "title": "字幕历史",
+      "searchPlaceholder": "搜索字幕历史...",
+      "loading": "正在加载...",
+      "empty": "未找到记录。",
+      "no_results": "未找到结果",
+      "delete_title": "删除记录？",
+      "delete_description": "这将永久删除历史记录中的转录内容。此操作无法撤消。"
+    },
+    "status": {
+      "disconnected": "未连接"
+    },
+    "update": {
+      "downloading": "正在下载更新",
+      "installing": "正在安装更新",
+      "restarting": "正在重启 AutoSubs",
+      "installUpdateNow": "安装并重启",
+      "newVersionAvailable": "有可用更新"
+    },
+    "resolve": {
+      "productName": "DaVinci Resolve",
+      "description": "工作区脚本集成",
+      "tooltip": {
+        "connected": "已连接",
+        "canGetAudio": "您可以从时间线获取音频，并将字幕添加回时间线。",
+        "cantConnect": "无法连接到时间线",
+        "openResolve": "打开 DaVinci Resolve，然后前往 Workspace → Scripts → AutoSubs"
+      }
+    },
+    "premiere": {
+      "productName": "Premiere Pro",
+      "description": "Adobe 扩展集成",
+      "tooltip": {
+        "connected": "已连接",
+        "canGetAudio": "你可以从时间线获取音频并添加字幕。",
+        "disconnected": "扩展已断开",
+        "openPremiere": "打开 Premiere Pro 即可自动连接。"
+      }
+    },
+    "aftereffects": {
+      "productName": "After Effects",
+      "description": "Adobe 扩展集成",
+      "tooltip": {
+        "connected": "已连接",
+        "canGetAudio": "您可以从合成中获取音频并将字幕添加回去。",
+        "disconnected": "扩展已断开",
+        "openAfterEffects": "打开 After Effects 以自动连接。"
+      }
+    }
+  },
+  "theme": {
+    "toggle": "切换主题"
+  },
+  "addToTimeline": {
+    "steps": {
+      "outputTrack": {
+        "title": "轨道"
+      },
+      "template": {
+        "title": "样式"
+      },
+      "speakers": {
+        "title": "说话人"
+      }
+    },
+    "conflict": {
+      "hasConflicts": "该轨道存在冲突的剪辑。字幕可能与现有内容重叠。"
+    },
+    "title": "添加到时间线",
+    "ready": {
+      "title": "字幕已就绪",
+      "description": "您的字幕已生成，可以添加到时间线中。"
+    },
+    "adding": "正在添加...",
+    "success": "已添加到时间线",
+    "mode": {
+      "regular": "常规",
+      "animated": "动画"
+    },
+    "preset": {
+      "new": "新建预设",
+      "builtIn": "内置",
+      "custom": "自定义",
+      "preview": "在 Resolve 中预览",
+      "duplicate": "复制",
+      "delete": "删除",
+      "export": "导出 JSON",
+      "copyJson": "复制 JSON",
+      "copied": "已复制到剪贴板",
+      "import": "导入文件",
+      "paste": "粘贴 JSON",
+      "phase": {
+        "launchingTitle": "正在 Resolve 中打开字幕…",
+        "launchingHint": "我们将在临时轨道上放置一个预览字幕。",
+        "editingTitle": "切换到 DaVinci Resolve",
+        "editingBody": "字幕已放置在新轨道上并在 Fusion 页面打开。使用检查器进行自定义，然后返回这里。",
+        "capturingTitle": "正在从 Resolve 读取设置…",
+        "nameTitle": "为您的预设命名",
+        "nameHint": "给它一个简短且描述性的名称。"
+      },
+      "action": {
+        "cancel": "取消",
+        "save": "保存预设",
+        "back": "返回",
+        "captureSettings": "捕获设置"
+      },
+      "nameLabel": "预设名称",
+      "namePlaceholder": "例如：粗体黄色、TikTok 风格",
+      "descriptionLabel": "描述",
+      "descriptionPlaceholder": "关于此预设的可选说明",
+      "confirmDeleteTitle": "删除预设？",
+      "confirmDelete": "此预设将从您的库中移除。内置预设不受影响。",
+      "confirmDeleteConfirm": "删除",
+      "importTitle": "粘贴预设 JSON",
+      "importPlaceholder": "在此处粘贴预设文件的内容…",
+      "importSubmit": "导入预设",
+      "errors": {
+        "invalidJson": "这看起来不像是一个有效的预设文件。",
+        "captureFailed": "无法从 Resolve 读取字幕设置。",
+        "nameRequired": "请输入名称。"
+      }
+    }
+  },
+  "replaceStrings": {
+    "title": "搜索/替换词语",
+    "find": "查找",
+    "findPlaceholder": "要查找的文本...",
+    "matchCase": "区分大小写",
+    "replaceWith": "替换为",
+    "replacePlaceholder": "替换文本...",
+    "occurrencesFound": "找到 {{count}} 处匹配",
+    "occurrencePosition": "第 {{current}} / {{total}} 处",
+    "noOccurrencesFound": "未找到匹配项",
+    "replaceCurrent": "替换当前项",
+    "replaceAll": "全部替换（{{count}}）"
+  }
+}

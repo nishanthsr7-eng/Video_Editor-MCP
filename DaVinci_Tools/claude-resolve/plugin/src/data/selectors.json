@@ -1,0 +1,15 @@
+{
+  "models": [
+    { "value": "opus",   "label": "Opus",   "sub": "Most capable; complex reasoning" },
+    { "value": "sonnet", "label": "Sonnet", "sub": "Balanced; best for most work" },
+    { "value": "haiku",  "label": "Haiku",  "sub": "Fastest; most cost-effective" }
+  ],
+  "effort": [
+    { "value": "auto",   "label": "Auto" },
+    { "value": "low",    "label": "Low" },
+    { "value": "medium", "label": "Medium" },
+    { "value": "high",   "label": "High" },
+    { "value": "xhigh",  "label": "Xhigh" },
+    { "value": "max",    "label": "Max" }
+  ]
+}

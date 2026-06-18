@@ -1,0 +1,26 @@
+# Deterministic line endings across OSes. Neutralizes the system-level
+# core.autocrlf=true so a Windows clone never writes CRLF into shell scripts
+# (a CRLF in a #!/bin/bash script => "bad interpreter" on macOS).
+* text=auto eol=lf
+
+# Shell / executable scripts — must stay LF on every platform.
+*.sh                 text eol=lf
+*.command            text eol=lf
+.githooks/pre-commit text eol=lf
+
+# Windows scripts — native CRLF.
+*.bat                text eol=crlf
+*.ps1                text eol=crlf
+
+# Binary — never apply text/eol conversion or diffs (prevents corruption).
+*.node   binary
+*.woff2  binary
+*.woff   binary
+*.ttf    binary
+*.otf    binary
+*.png    binary
+*.ico    binary
+*.icns   binary
+*.mov    binary
+*.mp4    binary
+*.wasm   binary

@@ -1,0 +1,204 @@
+{
+  "$schema": "https://schema.tauri.app/config/2.0.0",
+  "productName": "AutoSubs",
+  "version": "3.6.2",
+  "identifier": "com.autosubs",
+  "build": {
+    "beforeDevCommand": "npm run dev:frontend",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build:tauri-prep",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [],
+    "security": {
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$DESKTOP/**",
+          "$DOCUMENT/**",
+          "$DOWNLOAD/**",
+          "$RESOURCE/**"
+        ]
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis",
+      "app",
+      "deb",
+      "rpm"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": [
+      "resources/"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "13.3"
+    },
+    "linux": {
+      "deb": {
+        "desktopTemplate": "./linux/autosubs.desktop",
+        "depends": [
+          "ffmpeg"
+        ],
+        "files": {
+          "/opt/resolve/Fusion/Scripts/Utility/AutoSubs.lua": "resources/AutoSubs.lua",
+          "/usr/lib/autosubs/resources/AutoSubs.lua": "resources/AutoSubs.lua",
+          "/usr/lib/autosubs/resources/modules": "resources/modules/"
+        }
+      },
+      "rpm": {
+        "desktopTemplate": "./linux/autosubs.desktop",
+        "epoch": 0,
+        "release": "1",
+        "depends": [
+          "webkit2gtk4.1",
+          "openssl",
+          "libappindicator-gtk3",
+          "librsvg2",
+          "ffmpeg"
+        ],
+        "files": {
+          "/opt/resolve/Fusion/Scripts/Utility/AutoSubs.lua": "resources/AutoSubs.lua",
+          "/usr/lib/autosubs/resources/AutoSubs.lua": "resources/AutoSubs.lua",
+          "/usr/lib/autosubs/resources/modules": "resources/modules/"
+        }
+      }
+    },
+    "windows": {
+      "nsis": {
+        "template": "./windows/custom_installer.nsi",
+        "installerHooks": "./windows/hooks.nsi",
+        "installerIcon": "icons/icon.ico"
+      },
+      "certificateThumbprint": "4913cafc886d055b1634b0e191ede45034563b4a",
+      "timestampUrl": "http://time.certum.pl",
+      "digestAlgorithm": "sha256",
+      "signCommand": {
+        "cmd": "powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "./windows/sign.ps1",
+          "%1"
+        ]
+      }
+    },
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "cli": {
+      "description": "AutoSubs — transcribe and diarize an audio or video file to JSON. Run with no arguments to open the desktop app.",
+      "longDescription": "Transcribe a local audio or video file and print the transcript as JSON. Runs headlessly (no window) and exits when given arguments; with no arguments it launches the AutoSubs desktop interface.",
+      "args": [
+        {
+          "name": "input",
+          "description": "Path to the audio or video file to transcribe.",
+          "index": 1,
+          "takesValue": true
+        },
+        {
+          "name": "model",
+          "short": "m",
+          "description": "Transcription model: a Whisper size (tiny, base, small, medium, large-v3, large-v3-turbo, plus .en variants), parakeet, or a moonshine variant (moonshine-tiny, moonshine-base, ...). Downloaded automatically if missing. Default: small. See --list-models.",
+          "takesValue": true
+        },
+        {
+          "name": "list-models",
+          "description": "List the available transcription models and exit."
+        },
+        {
+          "name": "output",
+          "short": "o",
+          "description": "Write to this file instead of stdout (format inferred from extension if --format is omitted).",
+          "takesValue": true
+        },
+        {
+          "name": "format",
+          "short": "f",
+          "description": "Output format: text (default), json, srt, or vtt.",
+          "takesValue": true
+        },
+        {
+          "name": "lang",
+          "short": "l",
+          "description": "Source language code (e.g. en). Auto-detected if omitted.",
+          "takesValue": true
+        },
+        {
+          "name": "translate",
+          "description": "Translate the transcript to English."
+        },
+        {
+          "name": "target-language",
+          "description": "Target language code for translation.",
+          "takesValue": true
+        },
+        {
+          "name": "diarize",
+          "description": "Enable speaker diarization."
+        },
+        {
+          "name": "max-speakers",
+          "description": "Maximum number of speakers when diarizing.",
+          "takesValue": true
+        },
+        {
+          "name": "gpu",
+          "description": "Force GPU acceleration on."
+        },
+        {
+          "name": "no-gpu",
+          "description": "Disable GPU acceleration (CPU only)."
+        },
+        {
+          "name": "density",
+          "description": "Subtitle text density: less, standard, more, single, or custom.",
+          "takesValue": true
+        },
+        {
+          "name": "max-lines",
+          "description": "Maximum lines per subtitle.",
+          "takesValue": true
+        },
+        {
+          "name": "max-chars-per-line",
+          "description": "Custom maximum characters per line (used with --density custom).",
+          "takesValue": true
+        },
+        {
+          "name": "text-case",
+          "description": "Text case: none, lowercase, uppercase, or titlecase.",
+          "takesValue": true
+        },
+        {
+          "name": "remove-punctuation",
+          "description": "Strip punctuation from the transcript."
+        },
+        {
+          "name": "prompt",
+          "description": "Custom prompt to guide transcription.",
+          "takesValue": true
+        }
+      ]
+    },
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEFENjNBQjZFRkVCQTQxQTkKUldTcFFiciticXRqcmZtTlRWRzdnSHhBMFVNZkxvOGFRZThXdXFNQjFzakxqNDF0bUFyWkhwckUK",
+      "endpoints": [
+        "https://github.com/tmoroney/auto-subs/releases/latest/download/latest.json"
+      ]
+    }
+  }
+}

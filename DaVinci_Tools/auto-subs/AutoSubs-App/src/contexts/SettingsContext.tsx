@@ -1,0 +1,260 @@
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { load, Store } from "@tauri-apps/plugin-store";
+import { platform } from "@tauri-apps/plugin-os";
+import { Settings } from "@/types";
+import { getPreferredUiLanguage, initI18n, normalizeUiLanguage } from "@/i18n";
+import {
+  models,
+  modelSupportsLanguage,
+  getFirstRecommendedModelForLanguage,
+} from "@/lib/models";
+import { DEFAULT_PRESET_ID } from "@/presets/built-in-presets";
+import { loadFontForLanguage } from "@/lib/font-loader";
+
+export const DEFAULT_SETTINGS: Settings = {
+  // Mode
+  audioInputMode: "timeline",
+  preferredEditorIntegration: "davinci",
+
+  // UI settings
+  uiLanguage: "en",
+  onboardingCompleted: false,
+  tourCompleted: false,
+  lastSeenVersion: "",
+  showEnglishOnlyModels: false,
+
+  // Survey notification settings
+  timesDismissedSurvey: 0,
+  lastSurveyDate: new Date().toISOString(),
+
+  // Milestone tracking
+  transcriptionsCompleted: 0,
+  subSlateMilestoneShown: false,
+
+  // Processing settings
+  model: 0,
+  language: "auto",
+  translate: false,
+  targetLanguage: "en",
+  enableDTW: true,
+  enableGpu: true, // gpu enabled by default on mac and linux, disabled by default on windows
+  enableDiarize: false,
+  maxSpeakers: null,
+  exportRange: "inout",
+
+  // Text settings
+  textDensity: "standard",
+  maxLinesPerSubtitle: 1,
+  splitOnPunctuation: true,
+  textCase: "none",
+  removePunctuation: false,
+  enableCensor: false,
+  censoredWords: [],
+  activeCensorLists: [],
+  customPrompt: "",
+  customMaxCharsPerLine: 38,
+
+  // Resolve settings
+  selectedInputTracksByApp: {
+    "davinci": ["1"],
+    "premiere": [],
+    "aftereffects": []
+  },
+  selectedOutputTrack: "1",
+  selectedTemplate: { value: "Default Template", label: "Default Template" },
+
+  // AutoSubs Caption settings
+  presetId: DEFAULT_PRESET_ID,
+  captionMode: "animated",
+
+  // Animation settings
+  animationType: "none",
+  highlightType: "none",
+  highlightColor: "#000000",
+};
+
+interface SettingsContextType {
+  settings: Settings;
+  updateSetting: <K extends keyof Settings>(key: K, value: Settings[K]) => void;
+  resetSettings: () => void;
+  isHydrated: boolean;
+}
+
+const SettingsContext = createContext<SettingsContextType | null>(null);
+
+export function SettingsProvider({ children }: { children: React.ReactNode }) {
+  const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
+  const [store, setStore] = useState<Store | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
+  const [shouldShowChildren, setShouldShowChildren] = useState(false);
+
+  async function initializeStore() {
+    try {
+      const loadedStore = await load("autosubs-store.json", {
+        autoSave: false,
+      });
+
+      const currentPlatform = await platform();
+      const isWindows = currentPlatform === "windows";
+
+      // If you store settings as a single object, you can get it all at once
+      // Alternatively, if they are stored individually, you can reconstruct the object here.
+      const storedSettings = await loadedStore.get<any>("settings");
+      const hydratedSettings = storedSettings
+        ? ({
+            ...DEFAULT_SETTINGS,
+            ...storedSettings,
+            // Migration: if selectedInputTracksByApp doesn't exist but selectedInputTracks does,
+            // use it for both davinci and premiere to preserve user state.
+            selectedInputTracksByApp: storedSettings.selectedInputTracksByApp || {
+              "davinci": storedSettings.selectedInputTracks || ["1"],
+              "premiere": storedSettings.selectedInputTracks || [],
+              "aftereffects": []
+            },
+            uiLanguage: storedSettings.onboardingCompleted
+              ? normalizeUiLanguage(storedSettings.uiLanguage)
+              : getPreferredUiLanguage(),
+            // Migration: convert old isStandaloneMode boolean to audioInputMode enum
+            audioInputMode:
+              storedSettings.audioInputMode ??
+              (storedSettings.isStandaloneMode ? "file" : "timeline"),
+          } as Settings)
+        : ({
+            ...DEFAULT_SETTINGS,
+            enableDTW: !isWindows,
+            uiLanguage: getPreferredUiLanguage(),
+          } as Settings);
+
+      initI18n(hydratedSettings.uiLanguage);
+      setSettings(hydratedSettings);
+      setStore(loadedStore);
+    } catch (error) {
+      console.error("Error initializing store:", error);
+    } finally {
+      setIsHydrated(true);
+    }
+  }
+
+  // Initialization useEffect
+  useEffect(() => {
+    initializeStore();
+  }, []);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+    requestAnimationFrame(() => setShouldShowChildren(true));
+  }, [isHydrated]);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+    initI18n(settings.uiLanguage);
+  }, [settings.uiLanguage, isHydrated]);
+
+  // Lazy-load the appropriate font for the currently selected languages so
+  // non-Latin text (CJK, Arabic, Devanagari, Thai, etc.) renders correctly.
+  useEffect(() => {
+    if (!isHydrated) return;
+    loadFontForLanguage(settings.uiLanguage);
+    loadFontForLanguage(settings.language);
+    if (settings.translate) loadFontForLanguage(settings.targetLanguage);
+  }, [
+    isHydrated,
+    settings.uiLanguage,
+    settings.language,
+    settings.translate,
+    settings.targetLanguage,
+  ]);
+
+  // Whenever settings change, persist them
+  useEffect(() => {
+    async function saveState() {
+      if (!isHydrated || !store) return;
+      try {
+        await store.set("settings", settings);
+        await store.save();
+      } catch (error) {
+        console.error("Error saving state:", error);
+      }
+    }
+
+    saveState();
+  }, [settings, store, isHydrated]);
+
+  // A handy reset function
+  function resetSettings() {
+    setSettings({
+      ...DEFAULT_SETTINGS,
+      uiLanguage: getPreferredUiLanguage(),
+      onboardingCompleted: true,
+      // Preserve milestone tracking and usage data
+      transcriptionsCompleted: settings.transcriptionsCompleted,
+      subSlateMilestoneShown: settings.subSlateMilestoneShown,
+      timesDismissedSurvey: settings.timesDismissedSurvey,
+      lastSurveyDate: settings.lastSurveyDate,
+      lastSeenVersion: settings.lastSeenVersion,
+    });
+  }
+
+  // Update a setting
+  // This enforces that key is a valid Settings property, and value must match its type
+  function updateSetting<K extends keyof Settings>(key: K, value: Settings[K]) {
+    setSettings((prev) => {
+      const newSettings = {
+        ...prev,
+        [key]:
+          key === "uiLanguage" ? normalizeUiLanguage(value as string) : value,
+      };
+
+      // Check if language changed and current model supports the new language
+      if (key === "language" && value !== prev.language) {
+        const currentModel = models[prev.model];
+        if (!modelSupportsLanguage(currentModel, value as string)) {
+          // Find first recommended model that supports the new language
+          const recommendedModel = getFirstRecommendedModelForLanguage(
+            value as string,
+          );
+          if (recommendedModel) {
+            const modelIndex = models.findIndex(
+              (m) => m.value === recommendedModel.value,
+            );
+            if (modelIndex !== -1) {
+              newSettings.model = modelIndex;
+            }
+          }
+        }
+      }
+
+      return newSettings;
+    });
+  }
+
+  return (
+    <SettingsContext.Provider
+      value={{
+        settings,
+        updateSetting,
+        resetSettings,
+        isHydrated,
+      }}
+    >
+      {isHydrated ? (
+        <div
+          className="h-screen w-screen bg-background transition-opacity duration-200"
+          style={{ opacity: shouldShowChildren ? 1 : 0 }}
+        >
+          {children}
+        </div>
+      ) : null}
+    </SettingsContext.Provider>
+  );
+}
+
+export const useSettings = () => {
+  const context = useContext(SettingsContext);
+  if (!context) {
+    throw new Error("useSettings must be used within a SettingsProvider");
+  }
+  return context;
+};
+
+export type { Settings };

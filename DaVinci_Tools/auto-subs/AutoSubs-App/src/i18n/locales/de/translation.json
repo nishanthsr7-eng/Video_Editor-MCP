@@ -1,0 +1,563 @@
+{
+  "settings": {
+    "title": "Einstellungen",
+    "description": "Konfiguriere deine AutoSubs-Einstellungen und Optionen.",
+    "sections": {
+      "transcription": "Transkription",
+      "language": "Sprache"
+    },
+    "gpu": {
+      "title": "GPU-Beschleunigung",
+      "description": "GPU für schnellere Transkription verwenden"
+    },
+    "dtw": {
+      "title": "Dynamisches Time Warping",
+      "description": "Verbessert die Wort-Timing-Genauigkeit"
+    },
+    "uiLanguage": {
+      "title": "App-Sprache",
+      "description": "Aktualisiert Menüs und Buttons"
+    },
+    "restartOnboarding": "Onboarding neu starten",
+    "openLogsFolder": "Logs-Ordner öffnen",
+    "preset": {
+      "button": "Einstellungen zurücksetzen",
+      "confirm": "Möchtest du wirklich alle Einstellungen auf Standard zurücksetzen? Das kann nicht rückgängig gemacht werden.",
+      "confirmTitle": "Einstellungen zurücksetzen"
+    },
+    "support": {
+      "supportAutoSubs": "AutoSubs unterstützen",
+      "viewSource": "Quellcode ansehen"
+    }
+  },
+  "common": {
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "apply": "Anwenden",
+    "add": "Hinzufügen",
+    "done": "Fertig",
+    "delete": "Löschen",
+    "generateSubtitles": "Generieren",
+    "startNewTranscription": "Neue Transkription starten",
+    "refresh": "Verbindung aktualisieren"
+  },
+  "update": {
+    "restartResolveServer": {
+      "title": "Update installiert",
+      "description": "AutoSubs wurde neu gestartet und von Resolve getrennt. Führe in DaVinci Resolve erneut Arbeitsbereich -> Skripte -> AutoSubs aus, um den aktualisierten Lua-Server zu starten."
+    }
+  },
+  "importExport": {
+    "button": "Exportieren / Importieren",
+    "importTab": "Import",
+    "exportTab": "Export",
+    "dropHere": "Datei hier ablegen oder klicken zum Auswählen",
+    "supportsSrt": "Unterstützt .srt-Dateien",
+    "selected": "Ausgewählt:",
+    "importFile": "Datei importieren",
+    "exportAsSrt": "Als SRT exportieren",
+    "downloadFormat": "{{format}} herunterladen",
+    "fileDialog": {
+      "subtitleFiles": "Untertiteldateien"
+    },
+    "exportFormats": {
+      "srt": {
+        "title": "Untertitel (.srt)",
+        "description": "Standard-Untertitelformat für Apps wie YouTube und VLC. Enthält Zeitstempel."
+      },
+      "txt": {
+        "title": "Transkript (.txt)",
+        "description": "Reiner Text-Export für LLMs, der Sprecherlabels enthält, wenn verfügbar."
+      }
+    }
+  },
+  "actionBar": {
+    "source": "Quelle",
+    "options": "Optionen",
+    "subtitleStyle": "Untertitelstil",
+    "subtitleStyleDescription": "Untertitel",
+    "model": "Modell",
+    "common": {
+      "auto": "Auto",
+      "off": "Aus"
+    },
+    "mode": {
+      "fileInput": "Datei",
+      "timeline": "Timeline"
+    },
+    "format": {
+      "removePunctuationTitle": "Interpunktion entfernen",
+      "removePunctuationDescription": "Entfernt Kommas, Punkte usw.",
+      "textCaseTitle": "Groß-/Kleinschreibung",
+      "textCaseDescription": "Untertitel-Schreibweise ändern",
+      "textCase": {
+        "normal": "Normal",
+        "lowercase": "kleinbuchstaben",
+        "uppercase": "GROSSBUCHSTABEN",
+        "titleCase": "Titel-Schreibweise"
+      },
+      "lineCountTitle": "Zeilenanzahl",
+      "lineCountDescription": "Max. Zeilen pro Untertitel",
+      "textDensityTitle": "Textdichte",
+      "textDensityDescription": "Textmenge auf dem Bildschirm",
+      "textDensity": {
+        "single": "Einzelnes Wort",
+        "less": "Weniger",
+        "standard": "Standard",
+        "more": "Mehr",
+        "custom": "Benutzerdefiniert"
+      },
+      "customCharsTitle": "Max. Zeichen",
+      "customCharsDescription": "Zeichen pro Zeile",
+      "customPromptButton": "Prompt",
+      "customPromptTitle": "Vokabular & Kontext",
+      "customPromptDescription": "Begriffe, Namen oder Kontext hinzufügen, um Whisper zu leiten.",
+      "customPromptPlaceholder": "Z.B. OpenAI, DaVinci Resolve – Tutorial über Untertitelbearbeitung.",
+      "customPromptLanguageWarning": "In der gleichen Sprache wie das Audio schreiben – ein Prompt in einer anderen Sprache kann zu falschen Transkriptionen führen.",
+      "customPromptWhisperOnly": "Nur von Whisper-Modellen unterstuetzt."
+    },
+    "censor": {
+      "title": "Wörter zensieren",
+      "wordCount": "{{count}} Wörter",
+      "dialogTitle": "Sensible Wörter zensieren",
+      "dialogDescription": "Füge Wörter hinzu, die in Untertiteln zensiert werden sollen.",
+      "inputPlaceholder": "Wort zum Zensieren hinzufügen",
+      "empty": "Noch keine zensierten Wörter.",
+      "lists": "Wortlisten",
+      "customSection": "Benutzerdefinierte Wörter",
+      "customSectionDescription": "Einzelne Wörter zur Zensur eingeben.",
+      "listWordCount": "{{count}} Wörter"
+    },
+    "speakers": {
+      "title": "Sprecher-Labels",
+      "description": "Unterschiedliche Sprecher erkennen",
+      "countTitle": "Anzahl der Sprecher",
+      "disabled": "Deaktiviert"
+    },
+    "tracks": {
+      "exportRange": {
+        "entire": "Ganze Timeline",
+        "inout": "In/Out Punkte"
+      },
+      "trackN": "Spur {{n}}",
+      "countSelected": "{{count}} Spuren ausgewählt",
+      "selectedLabel": "{{label}} ausgewählt",
+      "noneSelected": "Keine Spuren ausgewählt",
+      "selectAll": "Alle auswählen",
+      "clearAll": "Alle entfernen",
+      "noneFound": "Keine Audiospuren gefunden.",
+      "createTrack": "Keine Timeline gefunden"
+    },
+    "fileDrop": {
+      "aria": "Audio-Datei hier ablegen oder klicken zum Auswählen",
+      "prompt": "Ablegen oder klicken",
+      "supports": "Die meisten Formate"
+    },
+    "fileDialog": {
+      "mediaFiles": "Mediendateien (ffmpeg-unterstützt)"
+    },
+    "language": {
+      "title": "Sprache",
+      "source": "Quelle",
+      "translate": "Übersetzen",
+      "searchSourcePlaceholder": "Sprachen suchen...",
+      "searchTargetPlaceholder": "Zielsprachen suchen...",
+      "noLanguageFound": "Keine Sprache gefunden."
+    }
+  },
+  "speakerEditor": {
+    "title": "Sprecher bearbeiten",
+    "description": "Dies sind die im Audio erkannten Sprecher.",
+    "name": "Name",
+    "namePlaceholder": "Sprechernamen eingeben",
+    "outputTrack": "Ausgabespur",
+    "colors": {
+      "fill": "Füllung",
+      "outline": "Kontur"
+    }
+  },
+  "modelStatus": {
+    "cached": "Im Cache",
+    "storage": "Speicher:",
+    "ram": "RAM:",
+    "accuracy": "Genauigkeit",
+    "lightweight": "Leichtgewicht",
+    "downloadProgress": "{{progress}}%"
+  },
+  "models": {
+    "searchPlaceholder": "Modelle suchen...",
+    "noResults": "Keine Modelle gefunden.",
+    "filteredByLanguage": "Modelle nach Sprache gefiltert",
+    "groups": {
+      "specialized": "Für die ausgewählte Sprache spezialisiert",
+      "general": "Allgemeine Modelle"
+    },
+    "filters": {
+      "weight": "Leichtgewichtig",
+      "accuracy": "Genauigkeit",
+      "recommended": "Empfohlen",
+      "search": "Suche",
+      "clear": "Filter löschen"
+    },
+    "englishOnly": {
+      "title": "Nur-Englisch-Modelle",
+      "description": "Spezialisierte englische Modelle mit höherer Genauigkeit anzeigen."
+    },
+    "manage": {
+      "title": "Heruntergeladene Modelle verwalten",
+      "description": "Lösche gecachte Modelle, um Speicherplatz freizugeben.",
+      "empty": "Keine heruntergeladenen Modelle gefunden",
+      "deleteModel": "Modell löschen",
+      "confirmTitle": "Bist du sicher?",
+      "confirmBody": "Dadurch wird das Modell {{model}} von deinem Gerät gelöscht. Wenn du es später verwendest, muss es erneut heruntergeladen werden."
+    },
+    "diarize": {
+      "label": "Sprecher-Diarisierungsmodell",
+      "description": "Sprecherkennzeichnungs-Bundle",
+      "details": "Wird für Sprecherdiarisierung und Kennzeichnung verwendet.",
+      "badge": "Sprecher-Labels"
+    },
+    "tiny": {
+      "label": "Whisper Tiny",
+      "description": "Ultraschnell",
+      "details": "Schnellste Transkription mit minimalem Speicherbedarf. Ideal für schnelle Entwürfe.",
+      "badge": "Mehrsprachig"
+    },
+    "tiny_en": {
+      "label": "Whisper Tiny",
+      "description": "Ultraschnell",
+      "details": "Schnellste englische Transkription mit minimalem Speicherbedarf. Ideal für Entwürfe.",
+      "badge": "Nur Englisch"
+    },
+    "base": {
+      "label": "Whisper Base",
+      "description": "Schnell",
+      "details": "Zuverlässige Transkription mit geringem Speicherbedarf.",
+      "badge": "Mehrsprachig"
+    },
+    "base_en": {
+      "label": "Whisper Base",
+      "description": "Schnell",
+      "details": "Zuverlässige englische Transkription mit geringem Speicherbedarf.",
+      "badge": "Nur Englisch"
+    },
+    "small": {
+      "label": "Whisper Small",
+      "description": "Ausgewogen",
+      "details": "Ausgewogenes Verhältnis von Geschwindigkeit und Genauigkeit bei moderatem Speicherbedarf.",
+      "badge": "Mehrsprachig"
+    },
+    "small_en": {
+      "label": "Whisper Small",
+      "description": "Ausgewogen",
+      "details": "Ausgewogenes Verhältnis von Geschwindigkeit und englischer Genauigkeit bei moderatem Speicherbedarf.",
+      "badge": "Nur Englisch"
+    },
+    "medium": {
+      "label": "Whisper Medium",
+      "description": "Genau",
+      "details": "Hohe Genauigkeit bei moderater Geschwindigkeit. Gut für schwieriges Audio.",
+      "badge": "Mehrsprachig"
+    },
+    "medium_en": {
+      "label": "Whisper Medium",
+      "description": "Genau",
+      "details": "Hohe englische Genauigkeit bei moderater Geschwindigkeit.",
+      "badge": "Nur Englisch"
+    },
+    "large_v3_turbo": {
+      "label": "Whisper Large Turbo",
+      "description": "Schnell & genau",
+      "details": "Sehr gute Genauigkeit mit höherer Geschwindigkeit als das Large-Modell und moderatem Speicherbedarf.",
+      "badge": "Mehrsprachig"
+    },
+    "large_v3": {
+      "label": "Whisper Large",
+      "description": "Höchste Genauigkeit",
+      "details": "Höchste Genauigkeit für komplexes Audio, aber langsamer und mit hohem Speicherbedarf.",
+      "badge": "Mehrsprachig"
+    },
+    "parakeet": {
+      "label": "Parakeet",
+      "description": "Schnell & genau",
+      "details": "Hervorragende Genauigkeit und Geschwindigkeit für europäische Sprachen.",
+      "badge": "Europäisch"
+    },
+    "moonshine_tiny": {
+      "label": "Moonshine Tiny",
+      "description": "Ultraschnell",
+      "details": "Extrem schnelle englische Transkription auf dem Gerät mit minimalen Ressourcen. Ideal für Echtzeitnutzung.",
+      "badge": "Nur Englisch"
+    },
+    "moonshine_tiny_ar": {
+      "label": "Moonshine Tiny",
+      "description": "Ultraschnell",
+      "details": "Schnelle arabische Transkription auf dem Gerät mit minimalen Ressourcen.",
+      "badge": "Arabisch"
+    },
+    "moonshine_tiny_zh": {
+      "label": "Moonshine Tiny",
+      "description": "Ultraschnell",
+      "details": "Schnelle chinesische Transkription auf dem Gerät mit minimalen Ressourcen.",
+      "badge": "Chinesisch"
+    },
+    "moonshine_tiny_ja": {
+      "label": "Moonshine Tiny",
+      "description": "Ultraschnell",
+      "details": "Schnelle japanische Transkription auf dem Gerät mit minimalen Ressourcen.",
+      "badge": "Japanisch"
+    },
+    "moonshine_tiny_ko": {
+      "label": "Moonshine Tiny",
+      "description": "Ultraschnell",
+      "details": "Schnelle koreanische Transkription auf dem Gerät mit minimalen Ressourcen.",
+      "badge": "Koreanisch"
+    },
+    "moonshine_tiny_uk": {
+      "label": "Moonshine Tiny",
+      "description": "Ultraschnell",
+      "details": "Schnelle ukrainische Transkription auf dem Gerät mit minimalen Ressourcen.",
+      "badge": "Ukrainisch"
+    },
+    "moonshine_tiny_vi": {
+      "label": "Moonshine Tiny",
+      "description": "Ultraschnell",
+      "details": "Schnelle vietnamesische Transkription auf dem Gerät mit minimalen Ressourcen.",
+      "badge": "Vietnamesisch"
+    },
+    "moonshine_base": {
+      "label": "Moonshine Base",
+      "description": "Schnell & genau",
+      "details": "Schnelle englische Transkription auf dem Gerät mit besserer Genauigkeit als Moonshine Tiny.",
+      "badge": "Nur Englisch"
+    },
+    "moonshine_base_es": {
+      "label": "Moonshine Base",
+      "description": "Schnell & genau",
+      "details": "Schnelle spanische Transkription auf dem Gerät mit guter Genauigkeit.",
+      "badge": "Spanisch"
+    }
+  },
+  "completion": {
+    "processingComplete": "Verarbeitung abgeschlossen",
+    "subtitlesReady": "Deine Untertitel sind bereit!",
+    "noSpeechDetected": "Keine Sprache erkannt. Die Audiodatei enthält möglicherweise keine erkennbare Sprache.",
+    "viewSubtitles": "Untertitel anzeigen",
+    "exportToFile": "In Datei exportieren",
+    "addToTimeline": "Zur Timeline hinzufügen"
+  },
+  "progressSteps": {
+    "download": "Modell wird geladen",
+    "diarize": "Sprecher werden identifiziert",
+    "transcribe": "Sprache zu Text",
+    "translate": "Übersetze nach {{language}}",
+    "normaliseAudio": "Audio wird normalisiert",
+    "preparingAudio": "Audio wird vorbereitet...",
+    "processing": "Verarbeite",
+    "export": "Export"
+  },
+  "subtitles": {
+    "title": "Untertitel",
+    "speakers": "Sprecher",
+    "reformat": "Neu formatieren",
+    "waitingForSubtitles": "Warte auf Untertitel...",
+    "searchPlaceholder": "Untertitel durchsuchen...",
+    "searchAria": "Untertitel durchsuchen",
+    "search": {
+      "caseMatch": "Groß-/Kleinschreibung beachten",
+      "wholeWord": "Ganzes Wort",
+      "replaceAll": "Alle ersetzen",
+      "replaceWithPlaceholder": "Ersetzen durch..."
+    },
+    "addToTimeline": "Zur Timeline hinzufügen",
+    "loading": "Untertitel werden geladen...",
+    "jumpToTimeline": "Zu diesem Punkt in der Timeline springen",
+    "unknownSpeaker": "Unbekannter Sprecher",
+    "previousSubtitles": "Untertitelverlauf",
+    "empty": {
+      "noSubtitlesAvailable": "Deine Untertitel werden hier angezeigt, sobald die Transkription abgeschlossen ist"
+    }
+  },
+  "gettingStarted": {
+    "title": "Willkommen bei AutoSubs",
+    "description": "Wähle deine Sprache. Sie wird für die Oberfläche (falls verfügbar) und die Transkription verwendet.",
+    "selectLanguage": "Sprache auswählen",
+    "searchLanguage": "Sprachen suchen...",
+    "noLanguageFound": "Keine Sprache gefunden.",
+    "resolveNote": {
+      "openResolve": "Öffne DaVinci Resolve und gehe zu:",
+      "workspace": "Workspace (oberes Menü)",
+      "scripts": "Scripts",
+      "autosubs": "AutoSubs"
+    },
+    "continue": "Los geht's"
+  },
+  "tour": {
+    "connection": {
+      "title": "Verbindungsstatus",
+      "description": "Zeigt an, ob AutoSubs mit DaVinci Resolve verbunden ist. Grün bedeutet verbunden und bereit, auf die Timeline zuzugreifen."
+    },
+    "modeSwitcher": {
+      "title": "Eingabemodus",
+      "description": "Wechsle zwischen der direkten Transkription einer Datei oder dem Extrahieren von Audio aus einer DaVinci Resolve-Timeline."
+    },
+    "modelPicker": {
+      "title": "KI-Modell",
+      "description": "Wähle das Spracherkennungsmodell. Es wurde automatisch ein Modell ausgewählt, das deine Sprache unterstützt. Unterschiedliche Modelle bieten Kompromisse zwischen Geschwindigkeit und Genauigkeit."
+    },
+    "audioInput": {
+      "title": "Audioquelle",
+      "description": "Wähle Audiospuren aus deiner Resolve-Timeline oder ziehe eine Mediendatei hierher, um sie direkt zu transkribieren."
+    },
+    "controls": {
+      "title": "Transkriptionssteuerung",
+      "description": "Konfiguriere Sprache, Sprecheridentifikation, Textformatierung und klicke dann auf Untertitel generieren, um zu starten."
+    },
+    "history": {
+      "title": "Frühere Transkripte",
+      "description": "Greife hier auf alle früheren Transkriptionen zu und durchsuche sie."
+    },
+    "skip": "Tour überspringen",
+    "next": "Weiter",
+    "finish": "Los geht's"
+  },
+  "titlebar": {
+    "subtitleHistory": {
+      "title": "Untertitelverlauf",
+      "searchPlaceholder": "Untertitelverlauf durchsuchen...",
+      "loading": "Lädt...",
+      "empty": "Keine Transkripte gefunden.",
+      "no_results": "Keine Ergebnisse gefunden",
+      "delete_title": "Transkript löschen?",
+      "delete_description": "Dies wird das Transkript dauerhaft aus deiner Historie entfernen. Diese Aktion kann nicht rückgängig gemacht werden."
+    },
+    "status": {
+      "disconnected": "Getrennt"
+    },
+    "update": {
+      "downloading": "Update wird heruntergeladen",
+      "installing": "Update wird installiert",
+      "restarting": "AutoSubs wird neu gestartet",
+      "installUpdateNow": "Installieren und neu starten",
+      "newVersionAvailable": "Update verfügbar"
+    },
+    "resolve": {
+      "productName": "DaVinci Resolve",
+      "description": "Workspace-Skripte-Integration",
+      "tooltip": {
+        "connected": "Verbunden",
+        "canGetAudio": "Du kannst Audio aus der Timeline holen und Untertitel wieder hinzufügen.",
+        "cantConnect": "Keine Verbindung zur Timeline möglich",
+        "openResolve": "Öffne DaVinci Resolve und gehe zu Arbeitsbereich → Skripte → AutoSubs"
+      }
+    },
+    "premiere": {
+      "productName": "Premiere Pro",
+      "description": "Adobe-Erweiterungs-Integration",
+      "tooltip": {
+        "connected": "Verbunden",
+        "canGetAudio": "Sie können Audio von der Timeline abrufen und Untertitel hinzufügen.",
+        "disconnected": "Erweiterung getrennt",
+        "openPremiere": "Premiere Pro öffnen, um automatisch eine Verbindung herzustellen."
+      }
+    },
+    "aftereffects": {
+      "productName": "After Effects",
+      "description": "Adobe-Erweiterungs-Integration",
+      "tooltip": {
+        "connected": "Verbunden",
+        "canGetAudio": "Sie können Audio aus der Komposition abrufen und Untertitel hinzufügen.",
+        "disconnected": "Erweiterung getrennt",
+        "openAfterEffects": "Öffnen Sie After Effects, um automatisch zu verbinden."
+      }
+    }
+  },
+  "theme": {
+    "toggle": "Theme umschalten"
+  },
+  "addToTimeline": {
+    "steps": {
+      "outputTrack": {
+        "title": "Spur"
+      },
+      "template": {
+        "title": "Stil"
+      },
+      "speakers": {
+        "title": "Sprecher"
+      }
+    },
+    "title": "Zur Timeline hinzufügen",
+    "ready": {
+      "title": "Untertitel bereit",
+      "description": "Deine Untertitel wurden generiert und können nun zur Timeline hinzugefügt werden."
+    },
+    "adding": "Wird hinzugefügt...",
+    "success": "Zur Timeline hinzugefügt",
+    "mode": {
+      "regular": "Normal",
+      "animated": "Animiert"
+    },
+    "conflict": {
+      "hasConflicts": "Diese Spur hat konfliktierende Clips. Untertitel könnten mit vorhandenem Inhalt überlappen."
+    },
+    "preset": {
+      "new": "Neue Voreinstellung",
+      "builtIn": "Integriert",
+      "custom": "Benutzerdefiniert",
+      "preview": "Vorschau in Resolve",
+      "duplicate": "Duplizieren",
+      "delete": "Löschen",
+      "export": "JSON exportieren",
+      "copyJson": "JSON kopieren",
+      "copied": "In die Zwischenablage kopiert",
+      "import": "Datei importieren",
+      "paste": "JSON einfügen",
+      "phase": {
+        "launchingTitle": "Untertitel in Resolve öffnen…",
+        "launchingHint": "Wir platzieren einen Vorschau-Untertitel auf einer temporären Spur.",
+        "editingTitle": "Zu DaVinci Resolve wechseln",
+        "editingBody": "Ein Untertitel wurde auf einer neuen Spur platziert und auf der Fusion-Seite geöffnet. Passe ihn mit dem Inspektor an und komme dann hierher zurück.",
+        "capturingTitle": "Einstellungen aus Resolve lesen…",
+        "nameTitle": "Voreinstellung benennen",
+        "nameHint": "Gib ihr einen kurzen, beschreibenden Namen."
+      },
+      "action": {
+        "cancel": "Abbrechen",
+        "save": "Voreinstellung speichern",
+        "back": "Zurück",
+        "captureSettings": "Einstellungen erfassen"
+      },
+      "nameLabel": "Name der Voreinstellung",
+      "namePlaceholder": "z.B. Fett Gelb, TikTok-Stil",
+      "descriptionLabel": "Beschreibung",
+      "descriptionPlaceholder": "Optionale Notiz zu dieser Voreinstellung",
+      "confirmDeleteTitle": "Voreinstellung löschen?",
+      "confirmDelete": "Diese Voreinstellung wird aus deiner Bibliothek entfernt. Integrierte Voreinstellungen sind nicht betroffen.",
+      "confirmDeleteConfirm": "Löschen",
+      "importTitle": "Voreinstellungs-JSON einfügen",
+      "importPlaceholder": "Füge den Inhalt einer Voreinstellungsdatei hier ein…",
+      "importSubmit": "Voreinstellung importieren",
+      "errors": {
+        "invalidJson": "Das sieht nicht nach einer gültigen Voreinstellungsdatei aus.",
+        "captureFailed": "Untertitel-Einstellungen konnten nicht aus Resolve gelesen werden.",
+        "nameRequired": "Bitte gib einen Namen ein."
+      }
+    }
+  },
+  "replaceStrings": {
+    "title": "Wörter suchen/ersetzen",
+    "find": "Suchen",
+    "findPlaceholder": "Zu suchender Text...",
+    "matchCase": "Groß-/Kleinschreibung beachten",
+    "replaceWith": "Ersetzen durch",
+    "replacePlaceholder": "Ersatztext...",
+    "occurrencesFound": "{{count}} Treffer gefunden",
+    "occurrencePosition": "{{current}} von {{total}}",
+    "noOccurrencesFound": "Keine Treffer gefunden",
+    "replaceCurrent": "Aktuellen ersetzen",
+    "replaceAll": "Alle ersetzen ({{count}})"
+  }
+}
