@@ -12,7 +12,7 @@ An edit produced with this project — *Cyberpunk: Edgerunners*.
 
 ![Demo preview](demo/preview.gif)
 
-[▶ Watch the full clip with audio](demo/cyberpunk_edgerunners.mp4)
+[Watch the full clip with audio](https://raw.githubusercontent.com/nishanthsr7-eng/Video_Editor-MCP/main/demo/cyberpunk_edgerunners.mp4)
 
 ---
 
