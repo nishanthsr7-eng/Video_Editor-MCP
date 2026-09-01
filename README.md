@@ -10,7 +10,9 @@ You describe what you want. The AI calls the right tools in the right order, pro
 
 An edit produced with this project — *Cyberpunk: Edgerunners*.
 
-<video src="demo/cyberpunk_edgerunners.mp4" controls muted width="100%"></video>
+![Demo preview](demo/preview.gif)
+
+[▶ Watch the full clip with audio](demo/cyberpunk_edgerunners.mp4)
 
 ---
 
