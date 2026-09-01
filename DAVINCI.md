@@ -10,12 +10,17 @@ The `DaVinci_Tools/` folder contains a separate layer of tools for workflows cen
 DaVinci_Tools/
 ├── DaVinci-Resolve-Scripts/    Lua scripts for batch timeline operations
 ├── resolve-scripts/            Additional Lua automation scripts
-├── DaVinciResolve-DynamicText/ Python tool for driving Fusion title templates with live data
-├── auto-subs/                  Local AI subtitle generator with Resolve/Premiere/AE integration
+├── DaVinciResolve-DynamicText/ Python tool for driving Fusion title templates with live data  [third-party]
+├── auto-subs/                  Local AI subtitle generator with Resolve/Premiere/AE integration  [third-party]
 ├── claude-resolve/             AI terminal plugin embedded inside Resolve Studio
-├── awesome-davinci-resolve/    Curated reference: plugins, DCTLs, OFX effects, workflow tools
+├── awesome-davinci-resolve/    Curated reference: plugins, DCTLs, OFX effects, workflow tools  [third-party]
 └── manage-scripts.ps1          Interactive script installer/remover
 ```
+
+`DaVinci-Resolve-Scripts/`, `resolve-scripts/`, `claude-resolve/`, and `manage-scripts.ps1`
+are original to this project. `auto-subs/`, `DaVinciResolve-DynamicText/`, and
+`awesome-davinci-resolve/` are vendored third-party tools — see
+[Third-party tools](#third-party-tools) below for attribution and licenses.
 
 And separately, Fusion templates installed into Resolve:
 
@@ -30,48 +35,6 @@ DaVinci_Scripts/
     ├── Edit/        10 edit page scripts
     └── Utility/     10 utility scripts
 ```
-
----
-
-## Python scripting bridge
-
-`davinci_amv_builder.py` demonstrates how to build a full Resolve timeline programmatically. It connects to a running Resolve instance, reads a set of JSON descriptor files that describe clips, transitions, effects, and subtitles, then places everything on the timeline automatically.
-
-**How it connects:**
-
-```python
-import DaVinciResolveScript as dvr
-resolve = dvr.scriptapp("Resolve")
-pm   = resolve.GetProjectManager()
-proj = pm.GetCurrentProject()
-mp   = proj.GetMediaPool()
-```
-
-This requires Resolve to be open with external scripting enabled:
-> **Preferences → System → General → External scripting using = Local**
-
-**Run from DaVinci's internal console** (Workspace → Console → Py3):
-```python
-exec(open(r"path\to\davinci_amv_builder.py", encoding="utf-8").read(), globals())
-```
-
-**Or run from a terminal:**
-```bash
-python davinci_amv_builder.py
-```
-
-### What the script does
-
-Given a set of JSON analysis files (clip selections, transition definitions, subtitle data, audio analysis), the script:
-
-1. Creates a new timeline at the target resolution and frame rate
-2. Imports source clips into the media pool
-3. Places clips on the timeline in order, setting in/out points
-4. Applies clip colors per segment (for visual organization in the timeline)
-5. Adds markers with grade instructions so the colorist knows what to apply per section
-6. Inserts the audio track
-
-The JSON files that drive it are produced by the MCP server pipeline (audio analysis, beat detection, manual clip selection). This is the bridge between the automated processing side and the final manual polish in Resolve.
 
 ---
 
@@ -260,3 +223,22 @@ A step-by-step sequence for creating beat-synced anime edits using the installed
 | Flashback | VHS Retro + Soft Glow + Dip to White |
 | Boss reveal | Vignette Pulse + High Contrast Grade + Flash Black |
 | Power-up | Chromatic Aberration + Teal Orange Grade + FX Lens Flare Hit |
+
+---
+
+## Third-party tools
+
+Three tools under `DaVinci_Tools/` are vendored from other authors' open-source
+projects rather than written for this project. Each keeps its own LICENSE file
+in its folder; see the root [LICENSE](LICENSE) for how that relates to the
+rest of this repository.
+
+| Folder | What it is | License |
+|---|---|---|
+| `auto-subs/` | Local-first AI subtitle generator with Resolve/Premiere/After Effects integration | MIT |
+| `DaVinciResolve-DynamicText/` | Proof-of-concept for driving Fusion title templates with live external data | MIT |
+| `awesome-davinci-resolve/` | Curated link list of Resolve plugins, DCTLs, and workflow tools | CC0 |
+
+Everything else in `DaVinci_Tools/` and `DaVinci_Scripts/` — the Lua scripts,
+Fusion templates, `claude-resolve/`, and `manage-scripts.ps1` — is original
+work for this project.

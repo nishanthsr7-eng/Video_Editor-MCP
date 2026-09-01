@@ -1,43 +1,37 @@
-# FFmpeg-MCP
-Using ffmpeg command line to achieve an mcp server, can be very convenient, through the dialogue to achieve the local video search, tailoring, stitching, playback and other functions
+# Frame Extractor MCP
 
-<a href="https://glama.ai/mcp/servers/@video-creator/ffmpeg-mcp">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/@video-creator/ffmpeg-mcp/badge" alt="FFmpeg-Server MCP server" />
-</a>
+Frame extraction and general clip utilities via ffmpeg command-line tools -
+frame extraction, trimming, concatenation, overlay compositing, scaling, and
+video info lookup.
 
-## Support Tools
-The server implements the following tools: <br/>
-- `find_video_path`
-  The parameters are directory and file name, file name can be complete, or is not suffixed, recursive search in the directory, return the full path
-- `get_video_info`
-  The parameters are video path, return the video info, linkes duration/fps/codec/width/height.
-- `clip_video`
-  The parameter is the file path, start time, end time or duration, and returns the trimmed file path
-- `concat_videos`
-  The parameters are the list of files, the output path, and if the video elements in the list of files, such as width, height, frame rate, etc., are consistent, quick mode synthesis is automatically used
-- `play_video`
-  Play video/audio with ffplay, support many format, like mov/mp4/avi/mkv/3gp, video_path: video path speed: play rate loop: play count
-- `overlay_video`
-  Two video overlay. <br/>
-  background_video: backgroud video path <br/>
-  overlay_video: front video path <br/>
-  output_path: output video path<br/>
-  position: relative location<br/>
-  dx: x offset<br/>
-  dy: y offset<br/>
-- `scale_video`
-  Video scale. <br/>
-  video_path: in video path <br/>
-  width: out video width, -2 keep aspect <br/>
-  height: out video height, -2 keep aspect <br/>
-  output_path: output video path <br/>
-- `extract_frames_from_video`
-  Extract images from a video.<br/>
-  Parameters: <br/>
-  video_path (str): The path to the video.<br/>
-  fps (int): Extract one frame every specified number of seconds. If set to 0, extract all frames; if set to 1, extract one frame per second.<br/>
-  output_folder (str): The directory where the images will be saved.<br/>
-  format (int): The format of the extracted images; 0: PNG, 1: JPG, 2: WEBP.<br/>
-  total_frames (int): The maximum number of frames to extract. If set to 0, there is no limit<br/>
-<br/>
-More features are coming
+Used in this pipeline mainly for `extract_frames_from_video`, feeding source
+frames into the Real-ESRGAN upscaling and character extraction steps.
+
+## Setup
+
+```
+uv sync
+```
+
+Requires `ffmpeg`/`ffprobe` on PATH.
+
+## Tools
+
+- `find_video_path` - recursive filename search under a directory (exact or
+  suffix-less match), returns the full path.
+- `get_video_info` - duration, fps, codec, width, height.
+- `clip_video` - trim by start time plus an end time or duration.
+- `concat_videos` - join a list of clips; uses fast-path concat automatically
+  when width/height/fps already match across inputs.
+- `overlay_video` - composite one video over another at a given position and
+  pixel offset.
+- `scale_video` - resize, with `-2` on either dimension to preserve aspect
+  ratio.
+- `extract_frames_from_video` - pull frames as PNG/JPG/WEBP, either every N
+  seconds or all frames, with an optional total-frame cap.
+- `play_video` - preview a clip via ffplay (rate/loop control).
+
+---
+
+Vendored from [video-creator/ffmpeg-mcp](https://github.com/video-creator/ffmpeg-mcp)
+(MIT license, see [LICENSE](LICENSE)) and used as-is.

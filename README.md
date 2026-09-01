@@ -6,6 +6,14 @@ You describe what you want. The AI calls the right tools in the right order, pro
 
 ---
 
+## Demo
+
+An edit produced with this project — *Cyberpunk: Edgerunners*.
+
+<video src="demo/cyberpunk_edgerunners.mp4" controls muted width="100%"></video>
+
+---
+
 ## What this is
 
 Traditional video editing requires manual work in a timeline editor. This framework replaces that loop with a conversation:
@@ -88,10 +96,10 @@ For workflows that use DaVinci Resolve as the editing environment, the project i
 
 - **Lua scripts** for batch operations inside Resolve: clip coloring, marker creation, timeline stats, media pool organization, beat-sync prep, and more
 - **Fusion templates**: 44 title templates, 16 transitions, 28 effects, 5 animated generators — all installable into the free edition of Resolve
-- **Python scripting bridge**: builds full timelines in a running Resolve instance via the Scripting API, placing clips, setting durations, applying grades, and adding markers programmatically
 - **AI terminal plugin** (`claude-resolve`): embeds an AI assistant directly inside Resolve Studio for natural-language motion graphics
 
-See [DAVINCI.md](DAVINCI.md) for the full reference.
+See [DAVINCI.md](DAVINCI.md) for the full reference, including attribution
+for the handful of vendored third-party tools it bundles.
 
 ---
 
@@ -138,3 +146,11 @@ compose_layers()             → composite character + text onto a background
 apply_lut()                  → apply a cinematic color grade
 export_for_platform()        → encode for TikTok / YouTube Shorts
 ```
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE). A small number of bundled tools are vendored
+from other open-source authors and keep their own license: `Tools/Frame_Extractor_MCP/`
+and three tools under `DaVinci_Tools/` (see [DAVINCI.md](DAVINCI.md#third-party-tools)).

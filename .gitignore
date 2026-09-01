@@ -76,6 +76,20 @@ DaVinci_Tools/claude-resolve/plugin/dist/
 *.log
 
 # ─────────────────────────────────────────────
+#  Personal working notes and scratch scripts (not for public repo)
+# ─────────────────────────────────────────────
+
+Workflow.txt
+batch_rembg.py
+davinci_amv_builder.py
+edit_composer.py
+resolve_connect_test.py
+resolve_diag.py
+run_davinci_import.bat
+test_rembg.py
+Tools/Resolve_Scripts/
+
+# ─────────────────────────────────────────────
 #  DaVinci Resolve — runtime and project files
 # ─────────────────────────────────────────────
 
@@ -122,8 +136,5 @@ $RECYCLE.BIN/
 #  DaVinci_Scripts/**        — Fusion templates (.setting) and Lua scripts
 #  DaVinci_Tools/**          — resolve-scripts, auto-subs, claude-resolve, etc.
 #  *.md                      — all documentation
-#  Workflow.txt              — internal tool reference
-#  davinci_amv_builder.py    — DaVinci scripting bridge
-#  edit_composer.py          — ffmpeg edit compositor
-#  batch_rembg.py            — batch background removal helper
+#  demo/                     — showcase clip embedded in README.md
 #  manage-scripts.ps1        — DaVinci asset installer

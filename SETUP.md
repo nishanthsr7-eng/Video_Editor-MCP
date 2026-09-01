@@ -107,15 +107,6 @@ Select option `[2] Install` and enter `all` to install everything, or pick speci
 
 After installation, fully quit and reopen Resolve to refresh the Effects panel.
 
-**Python scripting bridge:**
-
-The Resolve Scripting API module path must be set. The builder scripts do this automatically via environment variables. If you need to set them manually:
-
-```
-RESOLVE_SCRIPT_API = C:\ProgramData\Blackmagic Design\DaVinci Resolve\Support\Developer\Scripting
-RESOLVE_SCRIPT_LIB = <your DaVinci install path>\fusionscript.dll
-```
-
 ---
 
 ## Directory structure
@@ -139,6 +130,7 @@ project root/
 ├── DaVinci_Scripts/           Fusion templates and Lua scripts (source)
 │   ├── Templates/
 │   └── Scripts/
+├── demo/                      Showcase clip embedded in README.md
 ├── Sources/                   Input media (not tracked in git)
 └── Output/                    Generated outputs (not tracked in git)
 ```
